@@ -58,7 +58,7 @@ class DetailInformationController: UIViewController {
         let imageView = UIImageView(image: UIImage(named: DaiPicName))
         imageView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.addSubview(imageView)
+        view.addSubview(imageView)
         
         let width = imageView.widthAnchor.constraint(equalToConstant: view.frame.width)
         let height = imageView.heightAnchor.constraint(equalToConstant: view.frame.width/1.778)
