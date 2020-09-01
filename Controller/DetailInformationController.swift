@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageViewer
 
 class DetailInformationController: UIViewController {
     
@@ -54,12 +55,13 @@ class DetailInformationController: UIViewController {
     }
     
     func showImage(){
-        
+
         let imageView = UIImageView(image: UIImage(named: DaiPicName))
+                
         imageView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
-        
+
         let width = imageView.widthAnchor.constraint(equalToConstant: view.frame.width)
         let height = imageView.heightAnchor.constraint(equalToConstant: view.frame.width/1.778)
         let xAnchor = imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -67,10 +69,7 @@ class DetailInformationController: UIViewController {
         NSLayoutConstraint.activate([width,height,xAnchor,yAnchor])
         view.layoutIfNeeded()
     }
-    
-    func shouView(){
-        
-    }
+
     
     @IBOutlet weak var characterImageDai: UIImageView!
     @IBOutlet weak var characterImage6Dai: UIImageView!
