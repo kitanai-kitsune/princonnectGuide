@@ -22,10 +22,21 @@ class PrincessController: UITableViewController {
         super.viewDidLoad()
         
         saveAsRealmData()
-        
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
         
     }
+    
+    //下拉刷新
+    @IBAction func refresh(_ sender: Any) {
+        
+        saveAsRealmData()
+        RealmPrincessDatas = realm.objects(RealmPrincessData.self)
+        
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+    
     
     //几段 默认1
     override func numberOfSections(in tableView: UITableView) -> Int {

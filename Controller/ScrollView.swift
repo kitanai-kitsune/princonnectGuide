@@ -25,6 +25,8 @@ class ScrollView: UIViewController {
         
         print("屏幕的尺寸是\(scrollView.frame.size)")
         
+        config()
+        
         //scroll的拖动功能
         scrollView.contentSize = imageView.bounds.size
         scrollView.addSubview(imageView)
@@ -55,16 +57,11 @@ class ScrollView: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func config(){
+        scrollView.indicatorStyle = .default//滚动条的属性
+        scrollView.showsVerticalScrollIndicator = false//垂直滚动条
+        scrollView.showsHorizontalScrollIndicator = false//水平滚动条
     }
-    */
 
 }
 
