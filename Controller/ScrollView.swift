@@ -19,31 +19,34 @@ class ScrollView: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let imageView = UIImageView(image: UIImage(named: imageName))
-        print("屏幕宽是\(scrollView.frame.width)")
-        print("图片的宽是\(imageView.bounds.width)")
-        print("屏幕高是\(scrollView.frame.height)")
-        print("图片的高是\(imageView.bounds.height)")
+        imageView = UIImageView(image: UIImage(named: imageName))
+        
+        print("图片的尺寸是\(imageView.bounds.size)")
+        
+        print("屏幕的尺寸是\(scrollView.frame.size)")
         
         //scroll的拖动功能
         scrollView.contentSize = imageView.bounds.size
-        //scrollView.contentOffset = .zero
         scrollView.addSubview(imageView)
         
         //scroll的缩放功能
         scrollView.delegate = self
         
+        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss(tap:))))
+        scrollView.isUserInteractionEnabled = true
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         let scaleFactor = scrollView.frame.width / imageView.bounds.width
         print("缩放比是\(scaleFactor)")
         
         scrollView.minimumZoomScale = scaleFactor
-        scrollView.maximumZoomScale = 10
+        scrollView.maximumZoomScale = 5
         scrollView.zoomScale = scaleFactor
-    
-        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss(tap:))))
-        scrollView.isUserInteractionEnabled = true
-        
-        imageView.center = CGPoint(x: imageView.frame.width / 2, y: (imageView.frame.height / 2) + (scrollView.frame.height - imageView.frame.height) / 2)
+        //scrollView.setZoomScale(scaleFactor, animated: true)//同上但带动画效果 比如双击放大
         
     }
 
@@ -68,5 +71,12 @@ class ScrollView: UIViewController {
 extension ScrollView: UIScrollViewDelegate{
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
+    }
+    
+    //缩放时保持局中 缩放因子要放在viewDidLayoutSubviews中
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if imageView.frame.height < scrollView.frame.height{
+        imageView.center = CGPoint(x: imageView.frame.width / 2, y: (imageView.frame.height / 2) + (scrollView.frame.height - imageView.frame.height) / 2)
+        }
     }
 }

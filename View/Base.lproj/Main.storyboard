@@ -167,14 +167,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9uP-Wm-6im">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="9uP-Wm-6im">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Wcr-Zg-ZeB"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="2dA-lY-Mzg"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9uP-Wm-6im" firstAttribute="leading" secondItem="qvP-eZ-jIo" secondAttribute="leading" id="MRY-zL-LaG"/>
+                            <constraint firstItem="9uP-Wm-6im" firstAttribute="top" secondItem="qvP-eZ-jIo" secondAttribute="top" id="YZr-Hc-O5m"/>
+                            <constraint firstAttribute="trailing" secondItem="9uP-Wm-6im" secondAttribute="trailing" id="dJA-r3-iBf"/>
+                            <constraint firstAttribute="bottom" secondItem="9uP-Wm-6im" secondAttribute="bottom" id="eCB-9V-oEz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="i5q-Tv-MDo"/>
                     </view>
                     <connections>
