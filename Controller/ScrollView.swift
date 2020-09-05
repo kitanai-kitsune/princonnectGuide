@@ -17,7 +17,7 @@ class ScrollView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         imageView = UIImageView(image: UIImage(named: imageName))
         
@@ -34,7 +34,16 @@ class ScrollView: UIViewController {
         //scroll的缩放功能
         scrollView.delegate = self
         
-        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss(tap:))))
+        let tapOnce = UITapGestureRecognizer(target: self, action: #selector(dismiss(tap:)))
+        scrollView.addGestureRecognizer(tapOnce)
+        
+        let tapTwice = UITapGestureRecognizer(target: self, action: #selector(zoomin(tap:)))
+        tapTwice.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(tapTwice)
+        
+        //优先检测tapTwice,若检测不到,或检测失败,则检测tapOnce,检测成功后,触发方法
+        tapOnce.require(toFail: tapTwice)
+        
         scrollView.isUserInteractionEnabled = true
         
     }
@@ -48,13 +57,21 @@ class ScrollView: UIViewController {
         scrollView.minimumZoomScale = scaleFactor
         scrollView.maximumZoomScale = 5
         scrollView.zoomScale = scaleFactor
-        //scrollView.setZoomScale(scaleFactor, animated: true)//同上但带动画效果 比如双击放大
+        //scrollView.setZoomScale(2, animated: true)//同上但带动画效果 比如双击放大2倍
         
     }
-
+    
     
     @objc private func dismiss(tap: UITapGestureRecognizer){
-        dismiss(animated: true, completion: nil)
+        if tap.state == .ended{
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func zoomin(tap: UITapGestureRecognizer){
+        if tap.state == .ended{
+            scrollView.setZoomScale(2, animated: true)
+        }
     }
     
     func config(){
@@ -62,7 +79,7 @@ class ScrollView: UIViewController {
         scrollView.showsVerticalScrollIndicator = false//垂直滚动条
         scrollView.showsHorizontalScrollIndicator = false//水平滚动条
     }
-
+    
 }
 
 extension ScrollView: UIScrollViewDelegate{
@@ -73,7 +90,7 @@ extension ScrollView: UIScrollViewDelegate{
     //缩放时保持局中 缩放因子要放在viewDidLayoutSubviews中
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if imageView.frame.height < scrollView.frame.height{
-        imageView.center = CGPoint(x: imageView.frame.width / 2, y: (imageView.frame.height / 2) + (scrollView.frame.height - imageView.frame.height) / 2)
+            imageView.center = CGPoint(x: imageView.frame.width / 2, y: (imageView.frame.height / 2) + (scrollView.frame.height - imageView.frame.height) / 2)
         }
     }
 }
