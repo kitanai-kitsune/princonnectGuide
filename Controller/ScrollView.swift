@@ -7,23 +7,28 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ScrollView: UIViewController {
     
-    
     @IBOutlet weak var scrollView: UIScrollView!
-    var imageName: String!
+    var imageName: String = ""
     var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        imageView = UIImageView(image: UIImage(named: imageName))
+        let urlString = "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(imageName).png"
+        guard let url = URL(string: urlString) else {return}
         
-        print("图片的尺寸是\(imageView.bounds.size)")
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 1408, height: 792))
+        imageView.kf.setImage(with: url)
         
-        print("屏幕的尺寸是\(scrollView.frame.size)")
+                        
+//        imageView = UIImageView(image: UIImage(named: imageName))
+        
+//        print("图片的尺寸是\(imageView.bounds.size)")
+//        print("屏幕的尺寸是\(scrollView.frame.size)")
         
         config()
         
@@ -52,7 +57,7 @@ class ScrollView: UIViewController {
         super.viewDidLayoutSubviews()
         
         let scaleFactor = scrollView.frame.width / imageView.bounds.width
-        print("缩放比是\(scaleFactor)")
+        //print("缩放比是\(scaleFactor)")
         
         scrollView.minimumZoomScale = scaleFactor
         scrollView.maximumZoomScale = 5

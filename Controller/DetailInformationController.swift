@@ -7,36 +7,21 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailInformationController: UIViewController {
     
     var DaiPicName:String = ""
     var Star = 1
-    var Dai6PicName:String?
+    var Dai6PicName:String = ""
     var TitleName:String = ""
     var have6Star = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        characterImageDai.image = UIImage(named: DaiPicName)
-        characterImageDai.layer.cornerRadius = 10.0//圆角
-                
-        characterStar.text = String(Star)
+        loadFromURL()
         
-        characterName.text = TitleName
-        
-        if have6Star == true{
-            haveSixStar.text = "六星大图"
-            characterImage6Dai.image = UIImage(named: Dai6PicName!)
-            characterImage6Dai.layer.cornerRadius = 10.0
-            characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))
-        }else{
-            haveSixStar.text = ""
-        }
-        
-        characterImageDai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:))))
-
     }
     
     @objc private func handleTap(tap: UITapGestureRecognizer){
@@ -60,4 +45,103 @@ class DetailInformationController: UIViewController {
     @IBOutlet weak var haveSixStar: UILabel!
     
 
+}
+
+extension DetailInformationController {
+    
+    private func loadFromURL(){
+    
+    let url = URL(string: "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(DaiPicName).png")
+    print("普通图片地址\(url as Any)")
+    
+    let processor = RoundCornerImageProcessor(cornerRadius: 30.0)
+        
+        characterImageDai.kf.indicatorType = .activity
+        characterImageDai.kf.setImage(
+            with: url,
+            placeholder: nil,
+            options: [
+            .processor(processor),
+            .cacheOriginalImage,
+            .transition(.fade(0.5))
+            ],
+    
+            progressBlock: {
+            receivedData, totolData in
+            let percentage = (Float(receivedData) / Float(totolData)) * 100.0
+            print("下载进度: \(percentage)%")}
+          )
+                
+        characterImageDai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:))))
+        
+        characterStar.text = String(Star)
+        
+        characterName.text = TitleName
+        
+        if have6Star == true{
+            haveSixStar.text = "六星大图"
+            let url = URL(string: "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(Dai6PicName).png")
+            print("六星图片地址\(url as Any)")
+            
+            characterImage6Dai.kf.indicatorType = .activity
+            characterImage6Dai.kf.setImage(
+                with: url,
+                placeholder: nil,
+                options: [
+                .processor(processor),
+                .cacheOriginalImage,
+                .transition(.fade(0.5))
+                ],
+                
+                progressBlock: {
+                    receivedData, totolData in
+                    let percentage = (Float(receivedData) / Float(totolData)) * 100.0
+                    print("下载进度: \(percentage)%")}
+                )
+            
+            characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))
+            
+        }else{
+            haveSixStar.text = ""
+        }
+    
+    //计算本地缓存大小
+    ImageCache.default.calculateDiskStorageSize { result in
+        switch result {
+        case .success(let size):
+            print("磁盘缓存大小: \(Double(size) / 1024 / 1024) MB")
+        case .failure(let error):
+            print(error)
+        }
+    }
+        //设置磁盘缓存大小
+        ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024
+        //设置内存缓存大小
+        ImageCache.default.memoryStorage.config.totalCostLimit = 50 * 1024 * 1024
+        
+    }
+    
+    
+    //无视此方法 (如需启动本地数据的话 导入图片!!)
+    private func loadFromLocal(){
+        
+        characterImageDai.image = UIImage(named: DaiPicName)
+        characterImageDai.layer.cornerRadius = 10.0//圆角
+        
+        characterStar.text = String(Star)
+        
+        characterName.text = TitleName
+        
+        if have6Star == true{
+            haveSixStar.text = "六星大图"
+            characterImage6Dai.image = UIImage(named: Dai6PicName)
+            characterImage6Dai.layer.cornerRadius = 10.0
+            characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))
+        }else{
+            haveSixStar.text = ""
+        }
+        
+        characterImageDai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:))))
+    }
+    
 }

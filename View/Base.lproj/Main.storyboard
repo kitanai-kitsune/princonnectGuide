@@ -212,14 +212,28 @@
                     <view key="view" contentMode="scaleToFill" id="Pdx-Lw-LiF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukv-hg-y5f">
+                                <rect key="frame" x="20" y="165" width="122" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="清除缓存"/>
+                                <connections>
+                                    <action selector="clearCache:" destination="TT8-3d-dc8" eventType="touchUpInside" id="syE-yf-rZi"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ukv-hg-y5f" firstAttribute="top" secondItem="l2r-Qc-Ymf" secondAttribute="top" constant="16.5" id="0aZ-lW-8bb"/>
+                            <constraint firstItem="Ukv-hg-y5f" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="CgP-OF-Iqb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="l2r-Qc-Ymf"/>
                     </view>
                     <navigationItem key="navigationItem" title="设定" id="vc6-tM-VRc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6h-zo-vrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4023" y="295"/>
+            <point key="canvasLocation" x="4021.739130434783" y="294.64285714285711"/>
         </scene>
         <!--角色一览-->
         <scene sceneID="6gd-Je-UXQ">
@@ -247,7 +261,7 @@
                     <tabBarItem key="tabBarItem" title="设定" id="fRH-IR-awm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="cUy-5z-Zwh">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
