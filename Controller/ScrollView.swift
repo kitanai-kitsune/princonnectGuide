@@ -21,10 +21,17 @@ class ScrollView: UIViewController {
         let urlString = "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(imageName).png"
         guard let url = URL(string: urlString) else {return}
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 1408, height: 792))
-        imageView.kf.setImage(with: url)
+//        do{
+//            let data = try Data(contentsOf: url)
+//            let image = UIImage(data: data)
+//            self.imageView = UIImageView(image: image)
+//        }catch{
+//            print(error)
+//        }
         
-                        
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 1408, height: 1408 / 1.778))
+        imageView.kf.setImage(with: url)
+
 //        imageView = UIImageView(image: UIImage(named: imageName))
         
 //        print("图片的尺寸是\(imageView.bounds.size)")
@@ -34,6 +41,7 @@ class ScrollView: UIViewController {
         
         //scroll的拖动功能
         scrollView.contentSize = imageView.bounds.size
+        print(scrollView.contentSize)
         scrollView.addSubview(imageView)
         
         //scroll的缩放功能
@@ -95,6 +103,7 @@ extension ScrollView: UIScrollViewDelegate{
     //缩放时保持局中 缩放因子要放在viewDidLayoutSubviews中
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if imageView.frame.height < scrollView.frame.height{
+            print(imageView.frame.size)
             imageView.center = CGPoint(x: imageView.frame.width / 2, y: (imageView.frame.height / 2) + (scrollView.frame.height - imageView.frame.height) / 2)
         }
     }

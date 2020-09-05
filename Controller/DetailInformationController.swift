@@ -25,17 +25,21 @@ class DetailInformationController: UIViewController {
     }
     
     @objc private func handleTap(tap: UITapGestureRecognizer){
+        if tap.state == .ended{
         let scrollView = storyboard!.instantiateViewController(withIdentifier: "scrollView") as! ScrollView
         scrollView.modalPresentationStyle = .fullScreen
         scrollView.imageName = DaiPicName
         present(scrollView, animated: true, completion: nil)
+        }
     }
     
     @objc private func handleTap6(tap: UITapGestureRecognizer){
+        if tap.state == .ended{
         let scrollView = storyboard!.instantiateViewController(withIdentifier: "scrollView") as! ScrollView
         scrollView.modalPresentationStyle = .fullScreen
         scrollView.imageName = Dai6PicName
         present(scrollView, animated: true, completion: nil)
+        }
     }
         
     @IBOutlet weak var characterImageDai: UIImageView!
@@ -43,6 +47,7 @@ class DetailInformationController: UIViewController {
     @IBOutlet weak var characterStar: UILabel!
     @IBOutlet weak var characterName: UILabel!
     @IBOutlet weak var haveSixStar: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
 
 }
@@ -63,13 +68,18 @@ extension DetailInformationController {
             options: [
             .processor(processor),
             .cacheOriginalImage,
-            .transition(.fade(0.5))
+            .transition(.fade(0.7))
             ],
     
             progressBlock: {
             receivedData, totolData in
             let percentage = (Float(receivedData) / Float(totolData)) * 100.0
-            print("下载进度: \(percentage)%")}
+                self.progressBar.setProgress(percentage / 100, animated: true)
+                if self.progressBar.progress == 1{
+                self.progressBar.isHidden = true
+                }
+            print("下载进度: \(percentage)%")
+        }
           )
                 
         characterImageDai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:))))
@@ -90,13 +100,14 @@ extension DetailInformationController {
                 options: [
                 .processor(processor),
                 .cacheOriginalImage,
-                .transition(.fade(0.5))
+                .transition(.fade(0.7))
                 ],
                 
                 progressBlock: {
                     receivedData, totolData in
                     let percentage = (Float(receivedData) / Float(totolData)) * 100.0
-                    print("下载进度: \(percentage)%")}
+                    print("下载六星图进度: \(percentage)%")
+            }
                 )
             
             characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))

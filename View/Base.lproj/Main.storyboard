@@ -140,6 +140,9 @@
                                 <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="0.84894049657534243" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="xRQ-hX-aST">
+                                <rect key="frame" x="0.0" y="88.5" width="414" height="2.5"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -147,13 +150,16 @@
                             <constraint firstItem="Nq0-Bs-pW2" firstAttribute="top" secondItem="Sk7-d3-BOY" secondAttribute="bottom" constant="16" id="2DU-Au-q9b"/>
                             <constraint firstItem="7Ja-S8-xMD" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="2k2-48-qfg"/>
                             <constraint firstItem="nNf-rU-t4A" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="44E-Nv-rNj"/>
+                            <constraint firstItem="xRQ-hX-aST" firstAttribute="leading" secondItem="ux3-qU-djv" secondAttribute="leading" id="4Vw-QF-1JO"/>
                             <constraint firstItem="7Ja-S8-xMD" firstAttribute="top" secondItem="Nq0-Bs-pW2" secondAttribute="bottom" constant="13" id="7qe-oE-eeb"/>
                             <constraint firstItem="Sk7-d3-BOY" firstAttribute="centerX" secondItem="ux3-qU-djv" secondAttribute="centerX" id="7qu-zi-jDD"/>
                             <constraint firstItem="1eu-76-adj" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nNf-rU-t4A" secondAttribute="trailing" symbolic="YES" id="9S1-Fp-KRC"/>
                             <constraint firstItem="1eu-76-adj" firstAttribute="bottom" secondItem="Mq1-IU-PeZ" secondAttribute="bottom" constant="20" id="Hm2-rh-jAn"/>
                             <constraint firstItem="7Ja-S8-xMD" firstAttribute="centerX" secondItem="ux3-qU-djv" secondAttribute="centerX" id="X4b-Aq-IAa"/>
+                            <constraint firstAttribute="trailing" secondItem="xRQ-hX-aST" secondAttribute="trailing" id="YWM-GB-Vaa"/>
                             <constraint firstItem="Mq1-IU-PeZ" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="cRM-KG-iAY"/>
                             <constraint firstItem="1eu-76-adj" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Nq0-Bs-pW2" secondAttribute="trailing" symbolic="YES" id="cUC-dT-rkN"/>
+                            <constraint firstItem="xRQ-hX-aST" firstAttribute="top" secondItem="1eu-76-adj" secondAttribute="top" constant="0.5" id="cwm-pD-9da"/>
                             <constraint firstItem="Nq0-Bs-pW2" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="h05-sf-56T"/>
                             <constraint firstItem="Sk7-d3-BOY" firstAttribute="top" secondItem="1eu-76-adj" secondAttribute="top" constant="70" id="kCz-Z5-jcw"/>
                             <constraint firstItem="Sk7-d3-BOY" firstAttribute="top" secondItem="nNf-rU-t4A" secondAttribute="bottom" constant="6" id="tGK-XK-Mzp"/>
@@ -169,11 +175,12 @@
                         <outlet property="characterName" destination="nNf-rU-t4A" id="0Ea-2p-9QA"/>
                         <outlet property="characterStar" destination="5Ud-6B-Cv0" id="rKI-k7-qoF"/>
                         <outlet property="haveSixStar" destination="Nq0-Bs-pW2" id="qaK-Bk-hkW"/>
+                        <outlet property="progressBar" destination="xRQ-hX-aST" id="NzL-dG-caY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="56O-23-3hB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4816" y="-502"/>
+            <point key="canvasLocation" x="4815.9420289855079" y="-502.23214285714283"/>
         </scene>
         <!--Scroll View-->
         <scene sceneID="ZQB-3L-nkf">
@@ -221,19 +228,31 @@
                                     <action selector="clearCache:" destination="TT8-3d-dc8" eventType="touchUpInside" id="syE-yf-rZi"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前占用硬盘:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBt-mm-ukO">
+                                <rect key="frame" x="20" y="268" width="115" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Ukv-hg-y5f" firstAttribute="top" secondItem="l2r-Qc-Ymf" secondAttribute="top" constant="16.5" id="0aZ-lW-8bb"/>
                             <constraint firstItem="Ukv-hg-y5f" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="CgP-OF-Iqb"/>
+                            <constraint firstItem="FBt-mm-ukO" firstAttribute="top" secondItem="Ukv-hg-y5f" secondAttribute="bottom" constant="55" id="G6m-ZE-MI4"/>
+                            <constraint firstItem="l2r-Qc-Ymf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ukv-hg-y5f" secondAttribute="trailing" symbolic="YES" id="a8L-Mv-bHf"/>
+                            <constraint firstItem="FBt-mm-ukO" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="lod-FM-r9M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l2r-Qc-Ymf"/>
                     </view>
                     <navigationItem key="navigationItem" title="设定" id="vc6-tM-VRc"/>
+                    <connections>
+                        <outlet property="hardDisk" destination="FBt-mm-ukO" id="ljJ-E4-GYa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6h-zo-vrW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4021.739130434783" y="294.64285714285711"/>
+            <point key="canvasLocation" x="4021.739130434783" y="293.97321428571428"/>
         </scene>
         <!--角色一览-->
         <scene sceneID="6gd-Je-UXQ">
