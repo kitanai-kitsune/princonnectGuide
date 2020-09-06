@@ -240,6 +240,7 @@
                             <constraint firstItem="Ukv-hg-y5f" firstAttribute="top" secondItem="l2r-Qc-Ymf" secondAttribute="top" constant="16.5" id="0aZ-lW-8bb"/>
                             <constraint firstItem="Ukv-hg-y5f" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="CgP-OF-Iqb"/>
                             <constraint firstItem="FBt-mm-ukO" firstAttribute="top" secondItem="Ukv-hg-y5f" secondAttribute="bottom" constant="55" id="G6m-ZE-MI4"/>
+                            <constraint firstItem="l2r-Qc-Ymf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FBt-mm-ukO" secondAttribute="trailing" symbolic="YES" id="MwA-pV-P91"/>
                             <constraint firstItem="l2r-Qc-Ymf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ukv-hg-y5f" secondAttribute="trailing" symbolic="YES" id="a8L-Mv-bHf"/>
                             <constraint firstItem="FBt-mm-ukO" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="lod-FM-r9M"/>
                         </constraints>
@@ -258,7 +259,7 @@
         <scene sceneID="6gd-Je-UXQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gIk-Hr-wHv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="角色一览" id="WO0-77-avD"/>
+                    <tabBarItem key="tabBarItem" title="角色一览" image="creditcard.fill" catalog="system" id="WO0-77-avD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="kmU-rh-6Aa">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -277,10 +278,10 @@
         <scene sceneID="d4J-df-IKa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k52-9L-yev" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设定" id="fRH-IR-awm"/>
+                    <tabBarItem key="tabBarItem" title="设定" image="briefcase.fill" catalog="system" id="fRH-IR-awm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="cUy-5z-Zwh">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -313,6 +314,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="briefcase.fill" catalog="system" width="128" height="102"/>
+        <image name="creditcard.fill" catalog="system" width="128" height="91"/>
         <image name="kokkoro1" width="128" height="128"/>
     </resources>
 </document>

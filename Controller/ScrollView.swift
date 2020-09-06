@@ -21,19 +21,19 @@ class ScrollView: UIViewController {
         let urlString = "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(imageName).png"
         guard let url = URL(string: urlString) else {return}
         
-//        do{
-//            let data = try Data(contentsOf: url)
-//            let image = UIImage(data: data)
-//            self.imageView = UIImageView(image: image)
-//        }catch{
-//            print(error)
-//        }
+        //        do{
+        //            let data = try Data(contentsOf: url)
+        //            let image = UIImage(data: data)
+        //            self.imageView = UIImageView(image: image)
+        //        }catch{
+        //            print(error)
+        //        }
         
         imageView = UIImageView(image: (UIImage(named: "placeholder")))
         imageView.kf.setImage(with: url)
         
-//        print("图片的尺寸是\(imageView.bounds.size)")
-//        print("屏幕的尺寸是\(scrollView.frame.size)")
+        //        print("图片的尺寸是\(imageView.bounds.size)")
+        //        print("屏幕的尺寸是\(scrollView.frame.size)")
         
         config()
         
@@ -54,9 +54,6 @@ class ScrollView: UIViewController {
         
         //优先检测tapTwice,若检测不到,或检测失败,则检测tapOnce,检测成功后,触发方法
         tapOnce.require(toFail: tapTwice)
-        
-        scrollView.isUserInteractionEnabled = true
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -104,9 +101,9 @@ extension ScrollView: UIScrollViewDelegate{
     //缩放时保持局中 缩放因子要放在viewDidLayoutSubviews中
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if imageView.frame.height < scrollView.frame.height{
-            print("图片的frame是\(imageView.frame.size)")
-            print("图片的bounds是\(imageView.bounds.size)")
             imageView.center = CGPoint(x: imageView.frame.width / 2, y: (imageView.frame.height / 2) + (scrollView.frame.height - imageView.frame.height) / 2)
         }
+        print("图片的frame是\(imageView.frame.size)")
+        print("图片的bounds是\(imageView.bounds.size)")
     }
 }

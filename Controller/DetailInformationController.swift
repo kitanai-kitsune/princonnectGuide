@@ -26,22 +26,22 @@ class DetailInformationController: UIViewController {
     
     @objc private func handleTap(tap: UITapGestureRecognizer){
         if tap.state == .ended{
-        let scrollView = storyboard!.instantiateViewController(withIdentifier: "scrollView") as! ScrollView
-        scrollView.modalPresentationStyle = .fullScreen
-        scrollView.imageName = DaiPicName
-        present(scrollView, animated: true, completion: nil)
+            let scrollView = storyboard!.instantiateViewController(withIdentifier: "scrollView") as! ScrollView
+            scrollView.modalPresentationStyle = .fullScreen
+            scrollView.imageName = DaiPicName
+            present(scrollView, animated: true, completion: nil)
         }
     }
     
     @objc private func handleTap6(tap: UITapGestureRecognizer){
         if tap.state == .ended{
-        let scrollView = storyboard!.instantiateViewController(withIdentifier: "scrollView") as! ScrollView
-        scrollView.modalPresentationStyle = .fullScreen
-        scrollView.imageName = Dai6PicName
-        present(scrollView, animated: true, completion: nil)
+            let scrollView = storyboard!.instantiateViewController(withIdentifier: "scrollView") as! ScrollView
+            scrollView.modalPresentationStyle = .fullScreen
+            scrollView.imageName = Dai6PicName
+            present(scrollView, animated: true, completion: nil)
         }
     }
-        
+    
     @IBOutlet weak var characterImageDai: UIImageView!
     @IBOutlet weak var characterImage6Dai: UIImageView!
     @IBOutlet weak var characterStar: UILabel!
@@ -49,39 +49,39 @@ class DetailInformationController: UIViewController {
     @IBOutlet weak var haveSixStar: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     
-
+    
 }
 
 extension DetailInformationController {
     
     private func loadFromURL(){
-    
-    let url = URL(string: "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(DaiPicName).png")
-    print("普通图片地址\(url as Any)")
-    
-    let processor = RoundCornerImageProcessor(cornerRadius: 30.0)
+        
+        let url = URL(string: "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(DaiPicName).png")
+        print("普通图片地址\(url as Any)")
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 30.0)
         
         characterImageDai.kf.indicatorType = .activity
         characterImageDai.kf.setImage(
             with: url,
             placeholder: nil,
             options: [
-            .processor(processor),
-            .cacheOriginalImage,
-            .transition(.fade(0.7))
+                .processor(processor),
+                .cacheOriginalImage,
+                .transition(.fade(0.7))
             ],
-    
+            
             progressBlock: {
-            receivedData, totolData in
-            let percentage = (Float(receivedData) / Float(totolData)) * 100.0
+                receivedData, totolData in
+                let percentage = (Float(receivedData) / Float(totolData)) * 100.0
                 self.progressBar.setProgress(percentage / 100, animated: true)
                 if self.progressBar.progress == 1{
-                self.progressBar.isHidden = true
+                    self.progressBar.isHidden = true
                 }
-            print("下载进度: \(percentage)%")
+                print("下载进度: \(percentage)%")
         }
-          )
-                
+        )
+        
         characterImageDai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:))))
         
         characterStar.text = String(Star)
@@ -98,9 +98,9 @@ extension DetailInformationController {
                 with: url,
                 placeholder: nil,
                 options: [
-                .processor(processor),
-                .cacheOriginalImage,
-                .transition(.fade(0.7))
+                    .processor(processor),
+                    .cacheOriginalImage,
+                    .transition(.fade(0.7))
                 ],
                 
                 progressBlock: {
@@ -108,28 +108,24 @@ extension DetailInformationController {
                     let percentage = (Float(receivedData) / Float(totolData)) * 100.0
                     print("下载六星图进度: \(percentage)%")
             }
-                )
+            )
             
             characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))
             
         }else{
             haveSixStar.text = ""
         }
-    
-    //计算本地缓存大小
-    ImageCache.default.calculateDiskStorageSize { result in
-        switch result {
-        case .success(let size):
-            print("磁盘缓存大小: \(Double(size) / 1024 / 1024) MB")
-        case .failure(let error):
-            print(error)
-        }
-    }
-        //设置磁盘缓存大小
-        ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024
-        //设置内存缓存大小
-        ImageCache.default.memoryStorage.config.totalCostLimit = 50 * 1024 * 1024
         
+        //计算本地缓存大小
+        ImageCache.default.calculateDiskStorageSize { result in
+            switch result {
+            case .success(let size):
+                print("磁盘缓存大小: \(Double(size) / 1024 / 1024) MB")
+            case .failure(let error):
+                print(error)
+            }
+        }
+                
     }
     
     

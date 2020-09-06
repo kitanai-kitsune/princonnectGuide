@@ -9,7 +9,7 @@
 import UIKit
 
 class PrincessCell: UITableViewCell {
-
+    
     @IBOutlet weak var characterIcon: UIImageView!
     @IBOutlet weak var characterName: UILabel!
     
@@ -17,11 +17,11 @@ class PrincessCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }

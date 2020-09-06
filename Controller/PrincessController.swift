@@ -49,33 +49,33 @@ class PrincessController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return RealmPrincessDatas?.count ?? 1//提供多少数据就给多少行
     }
-
+    
     //配置每行里面显示什么
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PCR", for: indexPath) as! PrincessCell//重用哪个单元格 "PCR"
-
+        
         //cell.textLabel?.text = "コッコロ"//如果cell里面有一个textLabel的话 给他付值 因为有可能没有所以加?
         //indexPath.row 行数 第N行
         //indexPath.section 段数 第N段
         
         /*
-        在这里判断角色初始星数 如果是1和2显示什么图片 3显示什么图片 6显示什么图片(初始星数不可能是6)
-        (因为无论是1星还是2星图片名全为XXX1.png 所以写在一起了)(显示小图用)
-        */
+         在这里判断角色初始星数 如果是1和2显示什么图片 3显示什么图片 6显示什么图片(初始星数不可能是6)
+         (因为无论是1星还是2星图片名全为XXX1.png 所以写在一起了)(显示小图用)
+         */
         if let RealmPrincessDatas = RealmPrincessDatas{
-        switch RealmPrincessDatas[indexPath.row].characterStar{
+            switch RealmPrincessDatas[indexPath.row].characterStar{
             case 3:
-            cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "3")
-            cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
+                cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "3")
+                cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             case 6:
-            cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "6")
-            cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
+                cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "6")
+                cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             default:
-            cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "1")
-            cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
+                cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "1")
+                cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
+            }
         }
-        }
-
+        
         return cell
     }
     
@@ -97,16 +97,16 @@ class PrincessController: UITableViewController {
             vc.TitleName = RealmPrincessDatas![row].characterName//把值(角色名)付给vc里面(DetailInformationController)的TitleName值
             
             /*如果有6星则
-            把值(角色6星大图名)付给vc(DetailInformationController)里面的Dai6PicName值
-            把值有六星的信息付给vc(DetailInformationController)里面的have6Star
-            */
+             把值(角色6星大图名)付给vc(DetailInformationController)里面的Dai6PicName值
+             把值有六星的信息付给vc(DetailInformationController)里面的have6Star
+             */
             if RealmPrincessDatas![row].haveSixStar == true{
                 vc.have6Star = true
                 vc.Dai6PicName = RealmPrincessDatas![row].characterIcon + "6" + "dai"
             }
         }
     }
-
+    
 }
 
 extension PrincessController:UISearchBarDelegate{
@@ -124,25 +124,25 @@ extension PrincessController:UISearchBarDelegate{
                 }catch{
                     print(error)
                 }
-
+                
                 for num in 0...data.count - 1{
-
-                let a = data[num,"name"].stringValue
-                //print(a)//找图片用
-
-                let b = data[num,"katakana"].stringValue
-                //print(b)//显示名字片假名用
                     
-                let c = data[num,"replace","defaultstar"].intValue
-                //print(c)//显示角色初始星数
-                
-                let d = data[num,"replace","havesixstar"].boolValue
-                //print(d)//显示是否有6星
+                    let a = data[num,"name"].stringValue
+                    //print(a)//找图片用
                     
-                let e = data[num,"replace","kannjimei"].stringValue
-                //print(e)//显示真名
-                
-                let realmPrincessData = RealmPrincessData()
+                    let b = data[num,"katakana"].stringValue
+                    //print(b)//显示名字片假名用
+                    
+                    let c = data[num,"replace","defaultstar"].intValue
+                    //print(c)//显示角色初始星数
+                    
+                    let d = data[num,"replace","havesixstar"].boolValue
+                    //print(d)//显示是否有6星
+                    
+                    let e = data[num,"replace","kannjimei"].stringValue
+                    //print(e)//显示真名
+                    
+                    let realmPrincessData = RealmPrincessData()
                     
                     realmPrincessData.characterIcon = a
                     realmPrincessData.characterName = b
@@ -157,11 +157,11 @@ extension PrincessController:UISearchBarDelegate{
                     }catch{
                         print(error)
                     }
-
-                self.tableView.reloadData()//获得数据之后刷新一次页面
+                    
+                    self.tableView.reloadData()//获得数据之后刷新一次页面
                     
                 }
-
+                
                 print("网络上共有\(data.count)条数据")
                 print("本地共有\(self.RealmPrincessDatas!.count)条数据")
                 
@@ -196,5 +196,5 @@ extension PrincessController:UISearchBarDelegate{
             tableView.reloadData()
         }
     }
-
+    
 }

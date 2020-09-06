@@ -12,14 +12,16 @@ import Kingfisher
 class SettingController: UIViewController {
     
     let alert = UIAlertController(title: "清除缓存", message: "确认清除缓存", preferredStyle: .alert)
-
+    
     @IBAction func clearCache(_ sender: Any) {
-               
+        
         present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setCacheUsage()
         
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (_) in
             ImageCache.default.clearCache()
@@ -31,7 +33,7 @@ class SettingController: UIViewController {
         alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
             
         }))
-
+        
     }
     
     @IBOutlet weak var hardDisk: UILabel!
@@ -43,26 +45,26 @@ class SettingController: UIViewController {
         
     }
     
+    //MARK:- 计算磁盘占用
     func calculateDisk(){
         ImageCache.default.calculateDiskStorageSize { result in
-        switch result {
-        case .success(let size):
-            let a = round(Double(size) / 1024 / 1024)
-            self.hardDisk.text = "当前占用硬盘:\(a)MB"
-            print("磁盘缓存大小: \(Double(size) / 1024 / 1024) MB")
-        case .failure(let error):
-            print(error)
-        }
+            switch result {
+            case .success(let size):
+                let a = round(Double(size) / 1024 / 1024)
+                self.hardDisk.text = "当前占用硬盘:\(a)MB"
+                print("磁盘缓存大小: \(Double(size) / 1024 / 1024) MB")
+            case .failure(let error):
+                print(error)
+            }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    //MARK:- 设置内存与磁盘占用
+    func setCacheUsage(){
+    //设置磁盘缓存大小
+    ImageCache.default.diskStorage.config.sizeLimit = 100 * 1024 * 1024
+    //设置内存缓存大小
+    ImageCache.default.memoryStorage.config.totalCostLimit = 50 * 1024 * 1024
     }
-    */
-
+    
 }
