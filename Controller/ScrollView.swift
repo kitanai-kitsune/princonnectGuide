@@ -29,10 +29,8 @@ class ScrollView: UIViewController {
 //            print(error)
 //        }
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 1408, height: 1408 / 1.778))
+        imageView = UIImageView(image: (UIImage(named: "placeholder")))
         imageView.kf.setImage(with: url)
-
-//        imageView = UIImageView(image: UIImage(named: imageName))
         
 //        print("图片的尺寸是\(imageView.bounds.size)")
 //        print("屏幕的尺寸是\(scrollView.frame.size)")
@@ -41,7 +39,7 @@ class ScrollView: UIViewController {
         
         //scroll的拖动功能
         scrollView.contentSize = imageView.bounds.size
-        print(scrollView.contentSize)
+        print("ContentSize是\(scrollView.contentSize)")
         scrollView.addSubview(imageView)
         
         //scroll的缩放功能
@@ -68,7 +66,6 @@ class ScrollView: UIViewController {
         //print("缩放比是\(scaleFactor)")
         
         scrollView.minimumZoomScale = scaleFactor
-        scrollView.maximumZoomScale = 5
         scrollView.zoomScale = scaleFactor
         //scrollView.setZoomScale(2, animated: true)//同上但带动画效果 比如双击放大2倍
         
@@ -83,7 +80,11 @@ class ScrollView: UIViewController {
     
     @objc private func zoomin(tap: UITapGestureRecognizer){
         if tap.state == .ended{
-            scrollView.setZoomScale(2, animated: true)
+            if scrollView.zoomScale > scrollView.minimumZoomScale{
+                scrollView.setZoomScale(self.scrollView.minimumZoomScale, animated: true)
+            }else{
+                scrollView.setZoomScale(self.scrollView.maximumZoomScale, animated: true)
+            }
         }
     }
     
@@ -103,7 +104,8 @@ extension ScrollView: UIScrollViewDelegate{
     //缩放时保持局中 缩放因子要放在viewDidLayoutSubviews中
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if imageView.frame.height < scrollView.frame.height{
-            print(imageView.frame.size)
+            print("图片的frame是\(imageView.frame.size)")
+            print("图片的bounds是\(imageView.bounds.size)")
             imageView.center = CGPoint(x: imageView.frame.width / 2, y: (imageView.frame.height / 2) + (scrollView.frame.height - imageView.frame.height) / 2)
         }
     }
