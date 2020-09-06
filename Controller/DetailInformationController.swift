@@ -113,7 +113,8 @@ extension DetailInformationController {
             characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))
             
         }else{
-            haveSixStar.text = ""
+            //haveSixStar.text = ""
+            haveSixStar.removeFromSuperview()
         }
         
         //计算本地缓存大小
