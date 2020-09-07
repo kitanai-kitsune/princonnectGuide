@@ -21,8 +21,11 @@ class PrincessController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveAsRealmData()
+        deleteRealmData()
+        //saveAsRealmData()
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
+        
+        alert()
         
     }
     
@@ -107,6 +110,19 @@ class PrincessController: UITableViewController {
         }
     }
     
+    private func alert(){
+        let alert = UIAlertController(title: "下载数据", message: "是否下载数据", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+            self.saveAsRealmData()
+            self.RealmPrincessDatas = self.realm.objects(RealmPrincessData.self)
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { _ in
+            
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 extension PrincessController:UISearchBarDelegate{
@@ -163,11 +179,22 @@ extension PrincessController:UISearchBarDelegate{
                 }
                 
                 print("网络上共有\(data.count)条数据")
-                print("本地共有\(self.RealmPrincessDatas!.count)条数据")
+                print("本地共有\(self.RealmPrincessDatas?.count ?? 0)条数据")
                 
             }
         }
         
+    }
+    
+    func deleteRealmData(){
+        do{
+            try self.realm.write {
+                self.realm.deleteAll()
+            }
+        }catch{
+            print(error)
+        }
+        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
