@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>589395369435-bobebe8o6b18cvbmju0am67cbjqcllu3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.589395369435-bobebe8o6b18cvbmju0am67cbjqcllu3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDhwnFu3tYBVjB4-7zz1zkOiIluCiNDXCE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>589395369435</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.chiaki.princonnectGuide</string>
+	<key>PROJECT_ID</key>
+	<string>princessguide-9b42a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>princessguide-9b42a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:589395369435:ios:3cb78a55fc9a820cc2dbfe</string>
+	<key>DATABASE_URL</key>
+	<string>https://princessguide-9b42a.firebaseio.com</string>
+</dict>
+</plist>

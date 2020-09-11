@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import FirebaseUI
 
 class DetailInformationController: UIViewController {
     
@@ -16,11 +17,12 @@ class DetailInformationController: UIViewController {
     var Dai6PicName:String = ""
     var TitleName:String = ""
     var have6Star = false
-    
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadFromURL()
+        loadFromFireBase()
+        //loadFromURL()
         
     }
     
@@ -129,6 +131,128 @@ extension DetailInformationController {
                 
     }
     
+    private func loadImage(url: URL){
+        
+        characterImageDai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:))))
+        
+        characterStar.text = String(Star)
+        
+        characterName.text = TitleName
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 30.0)
+        
+        characterImageDai.kf.indicatorType = .activity
+        characterImageDai.kf.setImage(
+            with: url,
+            placeholder: nil,
+            options: [
+                .processor(processor),
+                .cacheOriginalImage,
+                .transition(.fade(0.7))
+            ],
+            
+            progressBlock: {
+                receivedData, totolData in
+                let percentage = (Float(receivedData) / Float(totolData)) * 100.0
+                self.progressBar.setProgress(percentage / 100, animated: true)
+                if self.progressBar.progress == 1{
+                    self.progressBar.isHidden = true
+                }
+                print("下载进度: \(percentage)%")
+        }
+        )
+        
+        //计算本地缓存大小
+        calculateDiskStorageSize()
+    }
+    
+    private func loadSixImage(url: URL){
+        characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))
+        haveSixStar.text = "六星大图"
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 30.0)
+        
+        characterImage6Dai.kf.indicatorType = .activity
+        characterImage6Dai.kf.setImage(
+            with: url,
+            placeholder: nil,
+            options: [
+                .processor(processor),
+                .cacheOriginalImage,
+                .transition(.fade(0.7))
+            ],
+            
+            progressBlock: {
+                receivedData, totolData in
+                let percentage = (Float(receivedData) / Float(totolData)) * 100.0
+                self.progressBar.setProgress(percentage / 100, animated: true)
+                if self.progressBar.progress == 1{
+                    self.progressBar.isHidden = true
+                }
+                print("下载进度: \(percentage)%")
+        }
+        )
+        
+        //计算本地缓存大小
+        calculateDiskStorageSize()
+    }
+
+    
+    private func loadFromFireBase(){
+        
+        let name = DaiPicName
+        let storageRef = Storage.storage().reference()
+        let ref = storageRef.child("pictures/\(name).png")
+            
+        ref.downloadURL { (url, error) in
+                if let error = error{
+                    print(error)
+                }else{
+                    
+                    self.loadImage(url: url!)
+                    
+                    //self.characterImageDai.sd_setImage(with: self.url, placeholderImage: UIImage(named: "placeholder"))
+                    print(url as Any)
+                    
+                }
+            }
+        
+        if have6Star == true{
+       
+            let name = Dai6PicName
+            let storageRef = Storage.storage().reference()
+            let ref = storageRef.child("pictures/\(name).png")
+            
+            ref.downloadURL { (url, error) in
+                if let error = error{
+                    print(error)
+                }else{
+                    
+                    self.loadSixImage(url: url!)
+                    
+                    //self.characterImageDai.sd_setImage(with: self.url, placeholderImage: UIImage(named: "placeholder"))
+                    print(url as Any)
+            }
+                
+            }
+        }else{
+        //haveSixStar.text = ""
+        self.haveSixStar.removeFromSuperview()
+        }
+                    
+    }
+    
+    //计算本地缓存大小
+    private func calculateDiskStorageSize(){
+        ImageCache.default.calculateDiskStorageSize { result in
+            switch result {
+            case .success(let size):
+                print("磁盘缓存大小: \(Double(size) / 1024 / 1024) MB")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     //无视此方法 (如需启动本地数据的话 导入图片!!)
     private func loadFromLocal(){

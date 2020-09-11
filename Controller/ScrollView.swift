@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import FirebaseUI
 
 class ScrollView: UIViewController {
     
@@ -17,6 +18,23 @@ class ScrollView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imageView = UIImageView(image: (UIImage(named: "placeholder")))
+        
+        let storageRef = Storage.storage().reference()
+        let ref = storageRef.child("pictures/\(imageName).png")
+        
+        ref.downloadURL { (url, error) in
+            if let error = error{
+                print(error)
+            }else{
+                self.imageView.kf.setImage(with: url)
+                //self.characterImageDai.sd_setImage(with: self.url, placeholderImage: UIImage(named: "placeholder"))
+                print(url as Any)
+                
+            }
+        }
+        
         
         let urlString = "https://raw.githubusercontent.com/kitanai-kitsune/CharacterPictures/master/pictures/\(imageName).png"
         guard let url = URL(string: urlString) else {return}
@@ -29,8 +47,8 @@ class ScrollView: UIViewController {
         //            print(error)
         //        }
         
-        imageView = UIImageView(image: (UIImage(named: "placeholder")))
-        imageView.kf.setImage(with: url)
+        //imageView = UIImageView(image: (UIImage(named: "placeholder")))
+        //imageView.kf.setImage(with: url)
         
         //        print("图片的尺寸是\(imageView.bounds.size)")
         //        print("屏幕的尺寸是\(scrollView.frame.size)")
