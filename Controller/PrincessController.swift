@@ -69,6 +69,8 @@ class PrincessController: UITableViewController {
          */
         if let RealmPrincessDatas = RealmPrincessDatas{
             
+            cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
+            
             let storageRef = Storage.storage().reference()
             
             switch RealmPrincessDatas[indexPath.row].characterStar{
@@ -82,7 +84,6 @@ class PrincessController: UITableViewController {
                     }
                 }
                 
-                cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             case 6:
                 let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "6").png")
                 
@@ -93,7 +94,6 @@ class PrincessController: UITableViewController {
                     }
                 }
                 
-                cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             default:
                 let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "1").png")
                 
@@ -103,8 +103,6 @@ class PrincessController: UITableViewController {
                     }else{
                     }
                 }
-
-                cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             }
         }
         

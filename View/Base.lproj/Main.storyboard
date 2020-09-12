@@ -34,7 +34,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wnG-ZK-kYb">
                                             <rect key="frame" x="20" y="-1" width="135" height="45.5"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kokkoro1" translatesAutoresizingMaskIntoConstraints="NO" id="ffh-Ef-rzm">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ffh-Ef-rzm">
                                                     <rect key="frame" x="0.0" y="0.0" width="45" height="45.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="SOu-5H-gKJ"/>
@@ -281,7 +281,7 @@
                     <tabBarItem key="tabBarItem" title="设定" image="briefcase.fill" catalog="system" id="fRH-IR-awm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="cUy-5z-Zwh">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -316,6 +316,5 @@
     <resources>
         <image name="briefcase.fill" catalog="system" width="128" height="102"/>
         <image name="creditcard.fill" catalog="system" width="128" height="91"/>
-        <image name="kokkoro1" width="128" height="128"/>
     </resources>
 </document>
