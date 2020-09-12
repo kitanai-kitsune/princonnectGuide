@@ -15,14 +15,25 @@ class ScrollView: UIViewController {
     
     var imageName: String = ""
     var imageView: UIImageView!
-    var stringurl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imageView = UIImageView(image: (UIImage(named: "placeholder")))
         
-        imageView.kf.setImage(with: URL(string: stringurl))
+        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
+            let path = url.appendingPathComponent("pictures/\(imageName).png")
+            
+            imageView.kf.setImage(
+                with: path,
+                placeholder: nil,
+                options: [
+                    .transition(.fade(0.5))
+                ]
+            )
+            
+        }
+        
                 
         config()
         
