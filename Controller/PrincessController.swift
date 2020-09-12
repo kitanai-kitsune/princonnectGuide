@@ -18,13 +18,11 @@ class PrincessController: UITableViewController {
     //在Model的RealmPrincessData中定义了RealmPrincessData有哪些属性 创建了一个叫RealmPrincessDatas的空数组 类型为Results
     var RealmPrincessDatas: Results<RealmPrincessData>?
     let realm = try! Realm()
-    
+        
     //只运行一次
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        deleteRealmData()
-        //saveAsRealmData()
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
         
         alert()
@@ -58,11 +56,7 @@ class PrincessController: UITableViewController {
     //配置每行里面显示什么
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PCR", for: indexPath) as! PrincessCell//重用哪个单元格 "PCR"
-        
-        //cell.textLabel?.text = "コッコロ"//如果cell里面有一个textLabel的话 给他付值 因为有可能没有所以加?
-        //indexPath.row 行数 第N行
-        //indexPath.section 段数 第N段
-        
+                
         /*
          在这里判断角色初始星数 如果是1和2显示什么图片 3显示什么图片 6显示什么图片(初始星数不可能是6)
          (因为无论是1星还是2星图片名全为XXX1.png 所以写在一起了)(显示小图用)
@@ -70,39 +64,30 @@ class PrincessController: UITableViewController {
         if let RealmPrincessDatas = RealmPrincessDatas{
             
             cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
-            
-            let storageRef = Storage.storage().reference()
-            
+                        
             switch RealmPrincessDatas[indexPath.row].characterStar{
             case 3:
-                let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "3").png")
                 
-                ref.downloadURL { (url, error) in
-                    if let urltext = url?.absoluteString{
-                        cell.characterIcon.kf.setImage(with: URL(string: urltext))
-                    }else{
-                    }
+                if let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
+                    let filepath = documentPath.appendingPathComponent("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "3").png")
+                    cell.characterIcon.kf.setImage(with: filepath)
                 }
-                
+             
+            //事实上并不存在这种情况?
             case 6:
-                let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "6").png")
                 
-                ref.downloadURL { (url, error) in
-                    if let urltext = url?.absoluteString{
-                        cell.characterIcon.kf.setImage(with: URL(string: urltext))
-                    }else{
-                    }
+                if let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
+                    let filepath = documentPath.appendingPathComponent("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "6").png")
+                    cell.characterIcon.kf.setImage(with: filepath)
                 }
-                
+//
             default:
-                let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "1").png")
                 
-                ref.downloadURL { (url, error) in
-                    if let urltext = url?.absoluteString{
-                        cell.characterIcon.kf.setImage(with: URL(string: urltext))
-                    }else{
-                    }
+                if let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
+                    let filepath = documentPath.appendingPathComponent("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "1").png")
+                    cell.characterIcon.kf.setImage(with: filepath)
                 }
+
             }
         }
         
@@ -126,7 +111,8 @@ class PrincessController: UITableViewController {
             vc.Star = RealmPrincessDatas![row].characterStar//把值(星数)付给vc里面(DetailInformationController)的Star值
             vc.TitleName = RealmPrincessDatas![row].characterName//把值(角色名)付给vc里面(DetailInformationController)的TitleName值
             
-            /*如果有6星则
+            /*
+             如果有6星则
              把值(角色6星大图名)付给vc(DetailInformationController)里面的Dai6PicName值
              把值有六星的信息付给vc(DetailInformationController)里面的have6Star
              */
@@ -140,11 +126,14 @@ class PrincessController: UITableViewController {
     private func alert(){
         let alert = UIAlertController(title: "下载数据", message: "是否下载数据", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+            self.deleteRealmData()
+            self.downloadToLocal()
             self.saveAsRealmData()
             self.RealmPrincessDatas = self.realm.objects(RealmPrincessData.self)
+            
         }))
         alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { _ in
-            
+
         }))
         
         present(alert, animated: true, completion: nil)
