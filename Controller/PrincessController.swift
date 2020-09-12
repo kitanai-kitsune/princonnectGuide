@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import RealmSwift
+import Kingfisher
+import Firebase
 
 class PrincessController: UITableViewController {
     
@@ -66,15 +68,42 @@ class PrincessController: UITableViewController {
          (因为无论是1星还是2星图片名全为XXX1.png 所以写在一起了)(显示小图用)
          */
         if let RealmPrincessDatas = RealmPrincessDatas{
+            
+            let storageRef = Storage.storage().reference()
+            
             switch RealmPrincessDatas[indexPath.row].characterStar{
             case 3:
-                cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "3")
+                let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "3").png")
+                
+                ref.downloadURL { (url, error) in
+                    if let urltext = url?.absoluteString{
+                        cell.characterIcon.kf.setImage(with: URL(string: urltext))
+                    }else{
+                    }
+                }
+                
                 cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             case 6:
-                cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "6")
+                let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "6").png")
+                
+                ref.downloadURL { (url, error) in
+                    if let urltext = url?.absoluteString{
+                        cell.characterIcon.kf.setImage(with: URL(string: urltext))
+                    }else{
+                    }
+                }
+                
                 cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             default:
-                cell.characterIcon.image = UIImage.init(named: RealmPrincessDatas[indexPath.row].characterIcon + "1")
+                let ref = storageRef.child("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "1").png")
+                
+                ref.downloadURL { (url, error) in
+                    if let urltext = url?.absoluteString{
+                        cell.characterIcon.kf.setImage(with: URL(string: urltext))
+                    }else{
+                    }
+                }
+
                 cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
             }
         }
