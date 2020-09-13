@@ -12,6 +12,7 @@ import Kingfisher
 class SettingTableController: UITableViewController {
     
     @IBOutlet weak var cacheUsage: UILabel!
+    @IBOutlet weak var fileStorage: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     
     let claerCacheAlert = UIAlertController(title: "清除缓存", message: "确认清除缓存", preferredStyle: .alert)
@@ -23,6 +24,8 @@ class SettingTableController: UITableViewController {
         if let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
           versionLabel.text = version
         }
+        
+        fileStorage.text = "开发中"
         
         setCacheUsage()
         
@@ -85,7 +88,7 @@ class SettingTableController: UITableViewController {
         
         switch section{
         case 0:
-            return 3
+            return 4
         case 1:
             return 1
         default:
@@ -118,7 +121,28 @@ class SettingTableController: UITableViewController {
             }
         }
     }
-
+    
+    //MARK:- 计算单个文件大小
+    func calculateFileStorage(filePath: String) -> Float{
+        
+        let manager = FileManager.default
+        var fileSize:Float = 0.0
+        if manager.fileExists(atPath: filePath) {
+          do {
+             let attributes = try manager.attributesOfItem(atPath: filePath)
+              if attributes.count != 0 {
+                 fileSize = attributes[FileAttributeKey.size]! as! Float / 1000000
+               }
+            print("\(fileSize)MB")
+            }catch{
+            }
+        }
+         return fileSize
+    }
+    
+    //MARK:- 计算文件大小
+    
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
