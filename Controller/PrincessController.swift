@@ -18,7 +18,7 @@ class PrincessController: UITableViewController {
     //在Model的RealmPrincessData中定义了RealmPrincessData有哪些属性 创建了一个叫RealmPrincessDatas的空数组 类型为Results
     var RealmPrincessDatas: Results<RealmPrincessData>?
     let realm = try! Realm()
-        
+
     //只运行一次
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +107,7 @@ class PrincessController: UITableViewController {
             let cell = sender as! PrincessCell//因为要从用户点的cell确定indexPath 所以这里先定义cell是哪个cell-PrincessCell
             let row = tableView.indexPath(for: cell)!.row//通过cell找到indexPath的行数  固定用法tableview.indexPath(for: )
             
-            vc.DaiPicName = RealmPrincessDatas![row].characterIcon + "3" + "dai"//把值(角色大图名)付给vc里面(DetailInformationController)的DaiPicName值
+            vc.DaiPicName = RealmPrincessDatas![row].characterIcon + "3dai"//把值(角色大图名)付给vc里面(DetailInformationController)的DaiPicName值
             vc.Star = RealmPrincessDatas![row].characterStar//把值(星数)付给vc里面(DetailInformationController)的Star值
             vc.TitleName = RealmPrincessDatas![row].characterName//把值(角色名)付给vc里面(DetailInformationController)的TitleName值
             
@@ -118,7 +118,7 @@ class PrincessController: UITableViewController {
              */
             if RealmPrincessDatas![row].haveSixStar == true{
                 vc.have6Star = true
-                vc.Dai6PicName = RealmPrincessDatas![row].characterIcon + "6" + "dai"
+                vc.Dai6PicName = RealmPrincessDatas![row].characterIcon + "6dai"
             }
         }
     }
@@ -130,10 +130,18 @@ class PrincessController: UITableViewController {
             self.downloadToLocal()
             self.saveAsRealmData()
             self.RealmPrincessDatas = self.realm.objects(RealmPrincessData.self)
+                        
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             
         }))
         alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { _ in
-
+            
+            let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            
+            print("文件夹路径:\(path)")
+            
         }))
         
         present(alert, animated: true, completion: nil)

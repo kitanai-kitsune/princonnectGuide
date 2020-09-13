@@ -18,6 +18,25 @@ class SettingController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    
+    @IBAction func deleteFile(_ sender: Any) {
+                
+        if let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
+        let iconFilePath = path.appendingPathComponent("/icons")
+        let pictureFilePath = path.appendingPathComponent("/pictures")
+            
+            do{
+                try FileManager.default.removeItem(at: iconFilePath)
+                try FileManager.default.createDirectory(at: iconFilePath, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.removeItem(at: pictureFilePath)
+                try FileManager.default.createDirectory(at: pictureFilePath, withIntermediateDirectories: true, attributes: nil)
+            }catch{
+                print(error)
+            }
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

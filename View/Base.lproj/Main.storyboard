@@ -234,14 +234,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGx-gB-Fdn">
+                                <rect key="frame" x="20" y="578" width="164" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="删除本地图片文件"/>
+                                <connections>
+                                    <action selector="deleteFile:" destination="TT8-3d-dc8" eventType="touchUpInside" id="MjP-1S-0H6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Ukv-hg-y5f" firstAttribute="top" secondItem="l2r-Qc-Ymf" secondAttribute="top" constant="16.5" id="0aZ-lW-8bb"/>
+                            <constraint firstItem="WGx-gB-Fdn" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="3aq-WU-t0L"/>
+                            <constraint firstItem="l2r-Qc-Ymf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WGx-gB-Fdn" secondAttribute="trailing" symbolic="YES" id="6y4-5K-nzk"/>
                             <constraint firstItem="Ukv-hg-y5f" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="CgP-OF-Iqb"/>
                             <constraint firstItem="FBt-mm-ukO" firstAttribute="top" secondItem="Ukv-hg-y5f" secondAttribute="bottom" constant="55" id="G6m-ZE-MI4"/>
                             <constraint firstItem="l2r-Qc-Ymf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FBt-mm-ukO" secondAttribute="trailing" symbolic="YES" id="MwA-pV-P91"/>
                             <constraint firstItem="l2r-Qc-Ymf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ukv-hg-y5f" secondAttribute="trailing" symbolic="YES" id="a8L-Mv-bHf"/>
+                            <constraint firstItem="WGx-gB-Fdn" firstAttribute="top" secondItem="FBt-mm-ukO" secondAttribute="bottom" constant="288.5" id="akE-s8-OaN"/>
                             <constraint firstItem="FBt-mm-ukO" firstAttribute="leading" secondItem="l2r-Qc-Ymf" secondAttribute="leading" constant="20" id="lod-FM-r9M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l2r-Qc-Ymf"/>
@@ -262,7 +273,7 @@
                     <tabBarItem key="tabBarItem" title="角色一览" image="creditcard.fill" catalog="system" id="WO0-77-avD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="kmU-rh-6Aa">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -281,7 +292,7 @@
                     <tabBarItem key="tabBarItem" title="设定" image="briefcase.fill" catalog="system" id="fRH-IR-awm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="cUy-5z-Zwh">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

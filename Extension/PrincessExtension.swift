@@ -12,9 +12,9 @@ import SwiftyJSON
 import Alamofire
 
 extension PrincessController {
-    
-    func downloadToLocal(){
         
+    func downloadToLocal(){
+                
         let storageRef = Storage.storage().reference()
         
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -34,6 +34,14 @@ extension PrincessController {
                         if let documentDirectoryFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
                             let sixStarPicturePath = documentDirectoryFileURL.appendingPathComponent("pictures/\(sixStarPictureName).png")
                             ref6dai.write(toFile: sixStarPicturePath)
+                            
+                            ref6dai.write(toFile: sixStarPicturePath).observe(.progress){ snapshot in
+
+                                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+
+                                print("六星大图下载进度:\(percentComplete)")
+
+                            }
                         }
                     }
                     
