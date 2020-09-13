@@ -19,7 +19,6 @@ class PrincessController: UITableViewController {
     var RealmPrincessDatas: Results<RealmPrincessData>?
     let realm = try! Realm()
 
-    //只运行一次
     override func viewDidLoad() {
         super.viewDidLoad()
         
