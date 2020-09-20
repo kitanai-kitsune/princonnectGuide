@@ -14,7 +14,9 @@ class SettingTableController: UITableViewController {
     @IBOutlet weak var cacheUsage: UILabel!
     @IBOutlet weak var fileStorage: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
-        
+    @IBOutlet weak var currentVersion: UILabel!
+    @IBOutlet weak var remoteVersion: UILabel!
+    
     let claerCacheAlert = UIAlertController(title: "清除缓存", message: "确认清除缓存", preferredStyle: .alert)
     let deleteFileAlert = UIAlertController(title: "清除数据", message: "确认清除数据", preferredStyle: .alert)
     
@@ -24,9 +26,7 @@ class SettingTableController: UITableViewController {
         if let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
           versionLabel.text = version
         }
-        
-        fileStorage.text = "0.0"
-        
+                
         setCacheUsage()
         
         claerCacheAlert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (_) in
@@ -87,6 +87,10 @@ class SettingTableController: UITableViewController {
         calculateDisk()
         
         fileStorage.text = String(calculateFileUsage(filePath: "pictures") + calculateFileUsage(filePath: "icons")) + "MB"
+        currentVersion.text = String(UserDefaults.standard.integer(forKey: "currentVersion"))
+        remoteVersion.text = String(UserDefaults.standard.integer(forKey: "remoteVersion"))
+        
+        tableView.reloadData()
         
     }
     
@@ -111,7 +115,7 @@ class SettingTableController: UITableViewController {
         case 0:
             return 4
         case 1:
-            return 1
+            return 3
         default:
             return 1
         }

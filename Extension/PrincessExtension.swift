@@ -84,6 +84,7 @@ extension PrincessController {
                 
                 remoteVersion = data[0,"version"].intValue
                 print("远程版本:\(remoteVersion)")
+                UserDefaults.standard.set(remoteVersion, forKey: "remoteVersion")
                 semaphore.signal()
             }
         }
