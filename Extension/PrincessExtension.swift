@@ -63,5 +63,40 @@ extension PrincessController {
             }
         }
     }
+    
+    func versionCheck() -> (result: Bool,remoteVersion: Int) {
+        
+        var currentVersion: Int
+        var remoteVersion: Int = 0
+        var result: Bool = false
+        
+        //UserDefaults.standard.set(20200920, forKey: "currentVersion")
+        currentVersion = UserDefaults.standard.integer(forKey: "currentVersion")
+        
+        print("当前版本:\(currentVersion)")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let queue = DispatchQueue.global(qos: .utility)
+                
+        AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/RemoteVersion.json").responseJSON(queue: queue) { responds in
+            if let json = responds.value{
+                let data = JSON(json)
+                
+                remoteVersion = data[0,"version"].intValue
+                print("远程版本:\(remoteVersion)")
+                semaphore.signal()
+            }
+        }
+        
+        semaphore.wait()
+        if currentVersion < remoteVersion {
+            result = true
+        }else{
+            result = false
+        }
+        print(result)
+        return (result, remoteVersion)
+    }
+    
 }
 

@@ -25,7 +25,7 @@ class PrincessController: UITableViewController {
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
         
         alert()
-        
+                
     }
     
     //下拉刷新
@@ -116,13 +116,15 @@ class PrincessController: UITableViewController {
     }
     
     private func alert(){
-        let alert = UIAlertController(title: "下载数据", message: "是否下载数据", preferredStyle: .alert)
+        let alert = UIAlertController(title: "检查到有更新数据", message: "是否下载数据", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
             self.deleteRealmData()
             self.downloadToLocal()
             self.saveAsRealmData()
             self.RealmPrincessDatas = self.realm.objects(RealmPrincessData.self)
-                        
+            
+            UserDefaults.standard.set(self.versionCheck().remoteVersion, forKey: "currentVersion")
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -132,7 +134,9 @@ class PrincessController: UITableViewController {
             
         }))
         
-        present(alert, animated: true, completion: nil)
+        if versionCheck().result == true{
+            present(alert, animated: true, completion: nil)
+        }
     }
     
 }
@@ -234,6 +238,19 @@ extension PrincessController:UISearchBarDelegate{
             
             tableView.reloadData()
         }
+    }
+    
+    func getRemoteVersion() -> Int{
+                
+        AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/RemoteVersion.json").responseJSON { responds in
+            if let json = responds.value{
+                let data = JSON(json)
+                
+                print("远程版本:\(data[0,"version"].intValue)")
+            }
+        }
+        
+        return 1
     }
     
 }
