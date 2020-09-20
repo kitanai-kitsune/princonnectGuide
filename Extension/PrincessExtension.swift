@@ -14,13 +14,8 @@ import Alamofire
 extension PrincessController {
         
     func downloadToLocal(){
-                
+        
         let storageRef = Storage.storage().reference()
-        
-        let path = NSHomeDirectory()
-            //FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        
-        print("文件夹路径:\(path)")
         
         AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/CharactorDatas.json").responseJSON { response in
             if let json = response.value{

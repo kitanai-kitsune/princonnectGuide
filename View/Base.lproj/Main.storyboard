@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5SO-1d-qJ9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5SO-1d-qJ9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +16,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lwj-48-gmK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="owA-c7-Cg4">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -98,14 +100,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sk7-d3-BOY" userLabel="Character Image Dai">
-                                <rect key="frame" x="20" y="158" width="374" height="210"/>
+                                <rect key="frame" x="20" y="136" width="374" height="210"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="210" id="4hi-wZ-W4P"/>
-                                    <constraint firstAttribute="width" constant="374" id="mhz-VM-G7k"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Mq1-IU-PeZ">
-                                <rect key="frame" x="20" y="772.5" width="84.5" height="20.5"/>
+                                <rect key="frame" x="20" y="772.5" width="84" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="初始：星" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvk-Lp-MsI">
                                         <rect key="frame" x="0.0" y="0.0" width="69.5" height="20.5"/>
@@ -114,7 +115,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ud-6B-Cv0" userLabel="Character Star">
-                                        <rect key="frame" x="76.5" y="0.0" width="8" height="20.5"/>
+                                        <rect key="frame" x="76.5" y="0.0" width="7.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -122,20 +123,19 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="210" translatesAutoresizingMaskIntoConstraints="NO" id="7Ja-S8-xMD" userLabel="Character Image 6Dai">
-                                <rect key="frame" x="20" y="418" width="374" height="210"/>
+                                <rect key="frame" x="20" y="412" width="374" height="210"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="210" id="3bm-jD-KgZ"/>
-                                    <constraint firstAttribute="width" constant="374" id="rd2-cr-ial"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="六星大图" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nq0-Bs-pW2" userLabel="Star6Image">
-                                <rect key="frame" x="20" y="384" width="121.5" height="21"/>
+                                <rect key="frame" x="20" y="361" width="121.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNf-rU-t4A" userLabel="CharacterName">
-                                <rect key="frame" x="20" y="94" width="77" height="58"/>
+                                <rect key="frame" x="20" y="94" width="77" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="0.84894049657534243" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -144,29 +144,29 @@
                                 <rect key="frame" x="0.0" y="88.5" width="414" height="2.5"/>
                             </progressView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="1eu-76-adj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7Ja-S8-xMD" firstAttribute="top" secondItem="Sk7-d3-BOY" secondAttribute="bottom" constant="50" id="0YW-id-8ac"/>
-                            <constraint firstItem="Nq0-Bs-pW2" firstAttribute="top" secondItem="Sk7-d3-BOY" secondAttribute="bottom" constant="16" id="2DU-Au-q9b"/>
+                            <constraint firstItem="Nq0-Bs-pW2" firstAttribute="top" secondItem="Sk7-d3-BOY" secondAttribute="bottom" constant="15" id="2DU-Au-q9b"/>
                             <constraint firstItem="7Ja-S8-xMD" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="2k2-48-qfg"/>
                             <constraint firstItem="nNf-rU-t4A" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="44E-Nv-rNj"/>
                             <constraint firstItem="xRQ-hX-aST" firstAttribute="leading" secondItem="ux3-qU-djv" secondAttribute="leading" id="4Vw-QF-1JO"/>
-                            <constraint firstItem="7Ja-S8-xMD" firstAttribute="top" secondItem="Nq0-Bs-pW2" secondAttribute="bottom" constant="13" id="7qe-oE-eeb"/>
+                            <constraint firstItem="7Ja-S8-xMD" firstAttribute="top" secondItem="Nq0-Bs-pW2" secondAttribute="bottom" constant="15" id="7qe-oE-eeb"/>
                             <constraint firstItem="Sk7-d3-BOY" firstAttribute="centerX" secondItem="ux3-qU-djv" secondAttribute="centerX" id="7qu-zi-jDD"/>
                             <constraint firstItem="1eu-76-adj" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nNf-rU-t4A" secondAttribute="trailing" symbolic="YES" id="9S1-Fp-KRC"/>
                             <constraint firstItem="1eu-76-adj" firstAttribute="bottom" secondItem="Mq1-IU-PeZ" secondAttribute="bottom" constant="20" id="Hm2-rh-jAn"/>
                             <constraint firstItem="7Ja-S8-xMD" firstAttribute="centerX" secondItem="ux3-qU-djv" secondAttribute="centerX" id="X4b-Aq-IAa"/>
                             <constraint firstAttribute="trailing" secondItem="xRQ-hX-aST" secondAttribute="trailing" id="YWM-GB-Vaa"/>
+                            <constraint firstItem="1eu-76-adj" firstAttribute="trailing" secondItem="7Ja-S8-xMD" secondAttribute="trailing" constant="20" id="apO-Hy-XkY"/>
                             <constraint firstItem="Mq1-IU-PeZ" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="cRM-KG-iAY"/>
                             <constraint firstItem="1eu-76-adj" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Nq0-Bs-pW2" secondAttribute="trailing" symbolic="YES" id="cUC-dT-rkN"/>
                             <constraint firstItem="xRQ-hX-aST" firstAttribute="top" secondItem="1eu-76-adj" secondAttribute="top" constant="0.5" id="cwm-pD-9da"/>
                             <constraint firstItem="Nq0-Bs-pW2" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="h05-sf-56T"/>
-                            <constraint firstItem="Sk7-d3-BOY" firstAttribute="top" secondItem="1eu-76-adj" secondAttribute="top" constant="70" id="kCz-Z5-jcw"/>
+                            <constraint firstItem="1eu-76-adj" firstAttribute="trailing" secondItem="Sk7-d3-BOY" secondAttribute="trailing" constant="20" id="mLy-Ot-HLZ"/>
                             <constraint firstItem="Sk7-d3-BOY" firstAttribute="top" secondItem="nNf-rU-t4A" secondAttribute="bottom" constant="6" id="tGK-XK-Mzp"/>
                             <constraint firstItem="Sk7-d3-BOY" firstAttribute="leading" secondItem="1eu-76-adj" secondAttribute="leading" constant="20" id="vm3-en-hSz"/>
                             <constraint firstItem="nNf-rU-t4A" firstAttribute="top" secondItem="1eu-76-adj" secondAttribute="top" constant="6" id="yE1-fs-23b"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="1eu-76-adj"/>
                     </view>
                     <navigationItem key="navigationItem" title="详细信息" largeTitleDisplayMode="never" id="H09-Uk-TUu"/>
                     <connections>
@@ -195,14 +195,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="i5q-Tv-MDo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9uP-Wm-6im" firstAttribute="leading" secondItem="qvP-eZ-jIo" secondAttribute="leading" id="MRY-zL-LaG"/>
                             <constraint firstItem="9uP-Wm-6im" firstAttribute="top" secondItem="qvP-eZ-jIo" secondAttribute="top" id="YZr-Hc-O5m"/>
                             <constraint firstAttribute="trailing" secondItem="9uP-Wm-6im" secondAttribute="trailing" id="dJA-r3-iBf"/>
                             <constraint firstAttribute="bottom" secondItem="9uP-Wm-6im" secondAttribute="bottom" id="eCB-9V-oEz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="i5q-Tv-MDo"/>
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="9uP-Wm-6im" id="wyB-6m-9TD"/>
@@ -219,7 +219,7 @@
                     <tabBarItem key="tabBarItem" title="角色一览" image="creditcard.fill" catalog="system" id="WO0-77-avD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="kmU-rh-6Aa">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -238,7 +238,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="9hH-2n-kaJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="数据" id="9Z1-1l-GRt">
                                 <cells>
@@ -273,7 +273,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Id-Jg-9e2">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Id-Jg-9e2">
                                                     <rect key="frame" x="20" y="7" width="374" height="30"/>
                                                     <state key="normal" title="清除缓存"/>
                                                     <connections>
@@ -319,7 +319,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcH-M8-Pzt">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcH-M8-Pzt">
                                                     <rect key="frame" x="20" y="7" width="374" height="30"/>
                                                     <state key="normal" title="删除本地图片文件"/>
                                                     <connections>
@@ -407,7 +407,7 @@
                     <tabBarItem key="tabBarItem" title="设置" image="briefcase.fill" catalog="system" id="N9z-hw-TvP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="tKM-NS-bwF">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -421,7 +421,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="briefcase.fill" catalog="system" width="128" height="102"/>
-        <image name="creditcard.fill" catalog="system" width="128" height="91"/>
+        <image name="briefcase.fill" catalog="system" width="128" height="105"/>
+        <image name="creditcard.fill" catalog="system" width="128" height="88"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
