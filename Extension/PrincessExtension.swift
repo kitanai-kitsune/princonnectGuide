@@ -17,7 +17,8 @@ extension PrincessController {
                 
         let storageRef = Storage.storage().reference()
         
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let path = NSHomeDirectory()
+            //FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         
         print("文件夹路径:\(path)")
         

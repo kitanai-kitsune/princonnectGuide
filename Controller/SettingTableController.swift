@@ -14,7 +14,7 @@ class SettingTableController: UITableViewController {
     @IBOutlet weak var cacheUsage: UILabel!
     @IBOutlet weak var fileStorage: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
-    
+        
     let claerCacheAlert = UIAlertController(title: "清除缓存", message: "确认清除缓存", preferredStyle: .alert)
     let deleteFileAlert = UIAlertController(title: "清除数据", message: "确认清除数据", preferredStyle: .alert)
     
@@ -25,7 +25,7 @@ class SettingTableController: UITableViewController {
           versionLabel.text = version
         }
         
-        fileStorage.text = "开发中"
+        fileStorage.text = "0.0"
         
         setCacheUsage()
         
@@ -40,20 +40,39 @@ class SettingTableController: UITableViewController {
         }))
         
         deleteFileAlert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (_) in
-            if let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
-            let iconFilePath = path.appendingPathComponent("/icons")
-            let pictureFilePath = path.appendingPathComponent("/pictures")
-                
+            
+            let documentsPath = NSHomeDirectory() + "/Documents"
+            let iconFilePath = documentsPath + "/icons"
+            let pictureFilePath = documentsPath + "/pictures"
+            
+            if FileManager.default.fileExists(atPath: iconFilePath){
                 do{
-                    try FileManager.default.removeItem(at: iconFilePath)
-                    try FileManager.default.createDirectory(at: iconFilePath, withIntermediateDirectories: true, attributes: nil)
-                    try FileManager.default.removeItem(at: pictureFilePath)
-                    try FileManager.default.createDirectory(at: pictureFilePath, withIntermediateDirectories: true, attributes: nil)
-                    print("succeed")
+                    try FileManager.default.removeItem(atPath: iconFilePath)
+                }catch{
+                    print(error)
+                }
+            }else{
+                do{
+                    try FileManager.default.createDirectory(atPath: iconFilePath, withIntermediateDirectories: true, attributes: nil)
                 }catch{
                     print(error)
                 }
             }
+            
+            if FileManager.default.fileExists(atPath: pictureFilePath){
+                do{
+                    try FileManager.default.removeItem(atPath: pictureFilePath)
+                }catch{
+                    print(error)
+                }
+            }else{
+                do{
+                    try FileManager.default.createDirectory(atPath: pictureFilePath, withIntermediateDirectories: true, attributes: nil)
+                }catch{
+                    print(error)
+                }
+            }
+            
         }))
         
         deleteFileAlert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
@@ -66,6 +85,8 @@ class SettingTableController: UITableViewController {
         super.viewDidAppear(true)
         
         calculateDisk()
+        
+        fileStorage.text = String(calculateFileUsage(filePath: "pictures") + calculateFileUsage(filePath: "icons")) + "MB"
         
     }
     
@@ -135,13 +156,27 @@ class SettingTableController: UITableViewController {
                }
             print("\(fileSize)MB")
             }catch{
+                print(error)
             }
         }
          return fileSize
     }
     
-    //MARK:- 计算文件大小
-    
+    //MARK:- 计算文件夹大小
+    func calculateFileUsage(filePath: String) -> Float{
+        var size: Float = 0.0
+        do{
+            let contents = try FileManager.default.contentsOfDirectory(atPath: NSHomeDirectory() + "/Documents/" + filePath)
+            for content in contents {
+                let pathForEachFile = NSHomeDirectory() + "/Documents/" + filePath + "/\(content)"
+                let attributes = try FileManager.default.attributesOfItem(atPath: pathForEachFile)
+                size += attributes[FileAttributeKey.size]! as! Float / 1000000
+            }
+        }catch{
+            print(error)
+        }
+        return round(size)
+    }
     
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
