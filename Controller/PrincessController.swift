@@ -42,13 +42,11 @@ class PrincessController: UITableViewController {
     
     //几段 默认1
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     //几行=几个cell
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return RealmPrincessDatas?.count ?? 1//提供多少数据就给多少行
     }
     
@@ -63,31 +61,26 @@ class PrincessController: UITableViewController {
         if let RealmPrincessDatas = RealmPrincessDatas{
             
             cell.characterName.text = RealmPrincessDatas[indexPath.row].characterName
-                        
+            
+            let iconsPath = "file://" + NSHomeDirectory() + "/Documents/icons/"
+            var filePath = ""
+            
             switch RealmPrincessDatas[indexPath.row].characterStar{
             case 3:
                 
-                if let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
-                    let filepath = documentPath.appendingPathComponent("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "3").png")
-                    cell.characterIcon.kf.setImage(with: filepath)
-                }
+                filePath = iconsPath + "\(RealmPrincessDatas[indexPath.row].characterIcon)3.png"
              
-            //事实上并不存在这种情况?
             case 6:
                 
-                if let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
-                    let filepath = documentPath.appendingPathComponent("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "6").png")
-                    cell.characterIcon.kf.setImage(with: filepath)
-                }
-//
+                filePath = iconsPath + "\(RealmPrincessDatas[indexPath.row].characterIcon)6.png"
+                
             default:
                 
-                if let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
-                    let filepath = documentPath.appendingPathComponent("icons/\(RealmPrincessDatas[indexPath.row].characterIcon + "1").png")
-                    cell.characterIcon.kf.setImage(with: filepath)
-                }
+                filePath = iconsPath + "\(RealmPrincessDatas[indexPath.row].characterIcon)1.png"
 
             }
+            
+            cell.characterIcon.kf.setImage(with: URL(string: filePath)!)
         }
         
         return cell
@@ -99,7 +92,7 @@ class PrincessController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)//取消选择之后的灰色底色
     }
     
-    //按下按钮时,去到下一个页面前做的事(等于正向传值 给下一个界面) 走的是detailInfoButton这条路线 detailInfoButton的destination是DetailInformationController
+    //按下按钮时,去到下一个页面前做的事(等于正向传值给下一个界面) 走的是detailInfoButton这条路线 detailInfoButton的destination是DetailInformationController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailInfoButton"{//先确定走的路线是detailInfoButton
             let vc = segue.destination as! DetailInformationController//然后确定路线的目的地是DetailInfomationController 并把它付值给vc
@@ -136,10 +129,6 @@ class PrincessController: UITableViewController {
             
         }))
         alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { _ in
-            
-            let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            
-            print("文件夹路径:\(path)")
             
         }))
         

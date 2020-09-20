@@ -57,9 +57,9 @@ extension DetailInformationController {
         
         characterStar.text = String(Star)
         characterName.text = TitleName
-        
-        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
-            let path = url.appendingPathComponent("pictures/\(DaiPicName).png")
+                
+        let picturesPath = "file://" + NSHomeDirectory() + "/Documents/pictures/"
+        let filePath = picturesPath + "\(DaiPicName).png"
             
             characterImageDai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:))))
             
@@ -67,7 +67,7 @@ extension DetailInformationController {
             
             characterImageDai.kf.indicatorType = .activity
             characterImageDai.kf.setImage(
-                with: path,
+                with: URL(string: filePath),
                 placeholder: nil,
                 options: [
                     .processor(processor),
@@ -85,12 +85,11 @@ extension DetailInformationController {
                     print("下载进度: \(percentage)%")
             }
             )
-        }
+        
         
         if have6Star == true{
             
-            if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last{
-            let path = url.appendingPathComponent("pictures/\(Dai6PicName).png")
+            let filePath = picturesPath + "\(Dai6PicName).png"
                 
                 characterImage6Dai.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap6(tap:))))
                 
@@ -98,7 +97,7 @@ extension DetailInformationController {
                 
                 characterImage6Dai.kf.indicatorType = .activity
                 characterImage6Dai.kf.setImage(
-                    with: path,
+                    with: URL(string: filePath),
                     placeholder: nil,
                     options: [
                         .processor(processor),
@@ -117,11 +116,9 @@ extension DetailInformationController {
                 }
                 )
                 
-            }
-            
-
         }else{
             self.haveSixStar.removeFromSuperview()
+            self.characterImage6Dai.removeFromSuperview()
         }
     }
     
