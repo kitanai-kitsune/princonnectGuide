@@ -95,7 +95,7 @@ extension PrincessController {
         }else{
             result = false
         }
-        print(result)
+        print("需要更新:\(result)")
         return (result, remoteVersion)
     }
     

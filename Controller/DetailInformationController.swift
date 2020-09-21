@@ -108,10 +108,6 @@ extension DetailInformationController {
                     progressBlock: {
                         receivedData, totolData in
                         let percentage = (Float(receivedData) / Float(totolData)) * 100.0
-                        //                self.progressBar.setProgress(percentage / 100, animated: true)
-                        //                if self.progressBar.progress == 1{
-                        //                    self.progressBar.isHidden = true
-                        //                }
                         print("六星图下载进度: \(percentage)%")
                 }
                 )

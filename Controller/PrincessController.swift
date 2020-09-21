@@ -17,15 +17,22 @@ class PrincessController: UITableViewController {
     
     //在Model的RealmPrincessData中定义了RealmPrincessData有哪些属性 创建了一个叫RealmPrincessDatas的空数组 类型为Results
     var RealmPrincessDatas: Results<RealmPrincessData>?
+    var ProfileDatas: Results<ProfileData>?
+    
     let realm = try! Realm()
-
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        deleteRealmData()
+        profileData()
+        saveAsRealmData()
+        
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
+        ProfileDatas = realm.objects(ProfileData.self)
         
         alert()
-                
+        
     }
     
     //下拉刷新
@@ -113,6 +120,16 @@ class PrincessController: UITableViewController {
                 vc.Dai6PicName = RealmPrincessDatas![row].characterIcon + "6dai"
             }
         }
+                
+        if segue.identifier == "profileButton"{
+            let vc = segue.destination as! ProfileViewController
+            let cell = sender as! PrincessCell
+            let row = tableView.indexPath(for: cell)!.row
+
+            vc.catchCopyString = ProfileDatas![row].catchCopy
+
+        }
+        
     }
     
     private func alert(){
@@ -145,18 +162,18 @@ extension PrincessController:UISearchBarDelegate{
     //把JSON数据转换成Realm数据库
     func saveAsRealmData(){
         
+//        do{
+//            try realm.write {
+//                realm.deleteAll()
+//            }
+//        }catch{
+//            print(error)
+//        }
+                
         AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/CharactorDatas.json").responseJSON { response in//http请求的最基本用法
             if let json = response.value{//如果成功取到值则付给json
                 let data = JSON(json)//获取系统可读取可使用的JSON数据格式(等于是转码) JSON()
-                
-                do{
-                    try self.realm.write {
-                        self.realm.deleteAll()
-                    }
-                }catch{
-                    print(error)
-                }
-                
+                                
                 for num in 0...data.count - 1{
                     
                     let a = data[num,"name"].stringValue
@@ -202,6 +219,39 @@ extension PrincessController:UISearchBarDelegate{
         
     }
     
+    func profileData(){
+                
+//        do{
+//            try realm.write{
+//                realm.deleteAll()
+//            }
+//        }catch{
+//            print(error)
+//        }
+                        
+        AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/CharactorProfile.json").responseJSON { response in
+            if let json = response.value{
+                let data = JSON(json)
+
+                for num in 0...data.count - 1{
+                    let a = data[num,"catch_copy"].stringValue
+
+                    let profileData = ProfileData()
+
+                    profileData.catchCopy = a
+
+                    do{
+                        try self.realm.write{
+                            self.realm.add(profileData)
+                        }
+                    }catch{
+                        print(error)
+                    }
+                }
+            }
+        }
+    }
+        
     func deleteRealmData(){
         do{
             try self.realm.write {
@@ -239,18 +289,5 @@ extension PrincessController:UISearchBarDelegate{
             tableView.reloadData()
         }
     }
-    
-    func getRemoteVersion() -> Int{
-                
-        AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/RemoteVersion.json").responseJSON { responds in
-            if let json = responds.value{
-                let data = JSON(json)
-                
-                print("远程版本:\(data[0,"version"].intValue)")
-            }
-        }
         
-        return 1
-    }
-    
 }
