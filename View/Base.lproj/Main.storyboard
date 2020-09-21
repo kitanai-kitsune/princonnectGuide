@@ -239,11 +239,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qw7-9N-HbY">
+                                                    <rect key="frame" x="63" y="14.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="qw7-9N-HbY" firstAttribute="centerY" secondItem="No2-Sb-RBv" secondAttribute="centerY" id="4K1-vi-qVl"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qw7-9N-HbY" secondAttribute="trailing" constant="20" symbolic="YES" id="4Rk-vi-By6"/>
                                                 <constraint firstItem="nNi-Pu-ToS" firstAttribute="leading" secondItem="No2-Sb-RBv" secondAttribute="leadingMargin" id="NNT-VI-Ydu"/>
                                                 <constraint firstItem="nNi-Pu-ToS" firstAttribute="centerY" secondItem="No2-Sb-RBv" secondAttribute="centerY" id="ciz-Nb-Kag"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nNi-Pu-ToS" secondAttribute="trailing" constant="20" symbolic="YES" id="luz-H4-6vb"/>
+                                                <constraint firstItem="qw7-9N-HbY" firstAttribute="leading" secondItem="nNi-Pu-ToS" secondAttribute="trailing" constant="8" symbolic="YES" id="dDC-ie-o0z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -379,7 +387,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="详细信息" largeTitleDisplayMode="never" id="R2k-dv-R57"/>
                     <connections>
+                        <outlet property="birthday" destination="kmp-y3-G5b" id="H2a-AO-VDE"/>
+                        <outlet property="bloodType" destination="EEx-VM-0FD" id="Z65-6O-eRs"/>
                         <outlet property="catchCopy" destination="0FW-FF-K0N" id="wUW-Du-TWw"/>
+                        <outlet property="height" destination="fkd-zb-WYd" id="fEr-t5-Uvu"/>
+                        <outlet property="realName" destination="qw7-9N-HbY" id="YaQ-YY-znG"/>
+                        <outlet property="weight" destination="fwc-NR-bVf" id="KUx-LJ-Gho"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXD-kD-EjS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

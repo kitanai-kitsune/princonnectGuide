@@ -11,13 +11,29 @@ import UIKit
 class ProfileViewController: UITableViewController {
     
     var catchCopyString: String = ""
+    var heightString: String = ""
+    var weightString: String = ""
+    var birthdayString: String = ""
+    var bloodTypeString: String = ""
+    var realNameString: String = ""
+    
     
     @IBOutlet weak var catchCopy: UILabel!
+    @IBOutlet weak var height: UILabel!
+    @IBOutlet weak var weight: UILabel!
+    @IBOutlet weak var birthday: UILabel!
+    @IBOutlet weak var bloodType: UILabel!
+    @IBOutlet weak var realName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         catchCopy.text = catchCopyString
+        height.text = heightString + "cm"
+        weight.text = weightString + "kg"
+        birthday.text = birthdayString
+        bloodType.text = bloodTypeString
+        realName.text = realNameString
         
     }
 

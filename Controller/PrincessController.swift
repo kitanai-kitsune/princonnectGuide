@@ -15,21 +15,17 @@ import Firebase
 
 class PrincessController: UITableViewController {
     
-    //在Model的RealmPrincessData中定义了RealmPrincessData有哪些属性 创建了一个叫RealmPrincessDatas的空数组 类型为Results
+    //在Model的RealmPrincessData中定义了RealmPrincessData有哪些属性 创建了一个叫RealmPrincessDatas的空数组 类型为Results(固定)
     var RealmPrincessDatas: Results<RealmPrincessData>?
-    var ProfileDatas: Results<ProfileData>?
+    var RealmProfileDatas: Results<RealmProfileData>?
     
     let realm = try! Realm()
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        deleteRealmData()
-        profileData()
-        saveAsRealmData()
-        
+                
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
-        ProfileDatas = realm.objects(ProfileData.self)
+        RealmProfileDatas = realm.objects(RealmProfileData.self)
         
         alert()
         
@@ -38,8 +34,12 @@ class PrincessController: UITableViewController {
     //下拉刷新
     @IBAction func refresh(_ sender: Any) {
         
+        deleteRealmData()
+        profileData()
         saveAsRealmData()
+        
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
+        RealmProfileDatas = realm.objects(RealmProfileData.self)
         
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
@@ -126,7 +126,12 @@ class PrincessController: UITableViewController {
             let cell = sender as! PrincessCell
             let row = tableView.indexPath(for: cell)!.row
 
-            vc.catchCopyString = ProfileDatas![row].catchCopy
+            vc.catchCopyString = RealmProfileDatas![row].catchCopy
+            vc.heightString = RealmProfileDatas![row].height
+            vc.weightString = RealmProfileDatas![row].weight
+            vc.birthdayString = RealmProfileDatas![row].birthday
+            vc.bloodTypeString = RealmProfileDatas![row].bloodType
+            vc.realNameString = RealmPrincessDatas![row].realName
 
         }
         
@@ -138,6 +143,7 @@ class PrincessController: UITableViewController {
             self.deleteRealmData()
             self.downloadToLocal()
             self.saveAsRealmData()
+            self.profileData()
             self.RealmPrincessDatas = self.realm.objects(RealmPrincessData.self)
             
             UserDefaults.standard.set(self.versionCheck().remoteVersion, forKey: "currentVersion")
@@ -159,17 +165,9 @@ class PrincessController: UITableViewController {
 }
 
 extension PrincessController:UISearchBarDelegate{
-    //把JSON数据转换成Realm数据库
+    
     func saveAsRealmData(){
-        
-//        do{
-//            try realm.write {
-//                realm.deleteAll()
-//            }
-//        }catch{
-//            print(error)
-//        }
-                
+                        
         AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/CharactorDatas.json").responseJSON { response in//http请求的最基本用法
             if let json = response.value{//如果成功取到值则付给json
                 let data = JSON(json)//获取系统可读取可使用的JSON数据格式(等于是转码) JSON()
@@ -177,19 +175,19 @@ extension PrincessController:UISearchBarDelegate{
                 for num in 0...data.count - 1{
                     
                     let a = data[num,"name"].stringValue
-                    //print(a)//找图片用
+                    //找图片用
                     
                     let b = data[num,"katakana"].stringValue
-                    //print(b)//显示名字片假名用
+                    //显示名字片假名用
                     
                     let c = data[num,"replace","defaultstar"].intValue
-                    //print(c)//显示角色初始星数
+                    //显示角色初始星数
                     
                     let d = data[num,"replace","havesixstar"].boolValue
-                    //print(d)//显示是否有6星
+                    //显示是否有6星
                     
                     let e = data[num,"replace","kannjimei"].stringValue
-                    //print(e)//显示真名
+                    //显示真名
                     
                     let realmPrincessData = RealmPrincessData()
                     
@@ -220,25 +218,38 @@ extension PrincessController:UISearchBarDelegate{
     }
     
     func profileData(){
-                
-//        do{
-//            try realm.write{
-//                realm.deleteAll()
-//            }
-//        }catch{
-//            print(error)
-//        }
-                        
+        
         AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/CharactorProfile.json").responseJSON { response in
             if let json = response.value{
                 let data = JSON(json)
 
                 for num in 0...data.count - 1{
                     let a = data[num,"catch_copy"].stringValue
-
-                    let profileData = ProfileData()
-
+                    //显示角色catchCopy
+                    
+                    let b = data[num,"height"].stringValue
+                    //显示身高
+                    
+                    let c = data[num,"weight"].stringValue
+                    //体重
+                    
+                    let d = data[num,"birth_month"].stringValue
+                    //生日月
+                    let e = data[num,"birth_day"].stringValue
+                    //生日日
+                    let combina = d + "月" + e + "日"
+                    //生日
+                    
+                    let f = data[num,"blood_type"].stringValue
+                    //血型
+                    
+                    let profileData = RealmProfileData()
+                    
                     profileData.catchCopy = a
+                    profileData.height = b
+                    profileData.weight = c
+                    profileData.birthday = combina
+                    profileData.bloodType = f
 
                     do{
                         try self.realm.write{
