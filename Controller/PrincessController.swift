@@ -125,7 +125,15 @@ class PrincessController: UITableViewController {
             let vc = segue.destination as! ProfileViewController
             let cell = sender as! PrincessCell
             let row = tableView.indexPath(for: cell)!.row
-
+            
+            switch RealmPrincessDatas![row].characterStar{
+                case 3:
+                    vc.iconString = RealmPrincessDatas![row].characterIcon + "3.png"
+                default:
+                    vc.iconString = RealmPrincessDatas![row].characterIcon + "1.png"
+            }
+            
+            vc.katakanaString = RealmPrincessDatas![row].characterName
             vc.catchCopyString = RealmProfileDatas![row].catchCopy
             vc.heightString = RealmProfileDatas![row].height
             vc.weightString = RealmProfileDatas![row].weight

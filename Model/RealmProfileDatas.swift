@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 
 class RealmProfileData:Object{
-    @objc dynamic var realName:String = ""
     @objc dynamic var catchCopy:String = ""
     @objc dynamic var height:String = ""
     @objc dynamic var weight:String = ""

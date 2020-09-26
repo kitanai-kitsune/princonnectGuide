@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UITableViewController {
     
+    var iconString: String = ""
+    var katakanaString: String = ""
     var catchCopyString: String = ""
     var heightString: String = ""
     var weightString: String = ""
@@ -17,7 +20,8 @@ class ProfileViewController: UITableViewController {
     var bloodTypeString: String = ""
     var realNameString: String = ""
     
-    
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var katakanaName: UILabel!
     @IBOutlet weak var catchCopy: UILabel!
     @IBOutlet weak var height: UILabel!
     @IBOutlet weak var weight: UILabel!
@@ -25,9 +29,13 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var bloodType: UILabel!
     @IBOutlet weak var realName: UILabel!
     
+    let iconsPath = "file://" + NSHomeDirectory() + "/Documents/icons/"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        icon.kf.setImage(with: URL(string: iconsPath + iconString)!)
+        katakanaName.text = katakanaString
         catchCopy.text = catchCopyString
         height.text = heightString + "cm"
         weight.text = weightString + "kg"
