@@ -23,6 +23,8 @@ class PrincessController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = 44
                 
         RealmPrincessDatas = realm.objects(RealmPrincessData.self)
         RealmProfileDatas = realm.objects(RealmProfileData.self)

@@ -14,6 +14,9 @@ import Alamofire
 extension PrincessController {
         
     func downloadToLocal(){
+        var sixStarPictureNumbers = 0
+        var threeStarPictureNumbers = 0
+        var iconNumbers = 0
         
         let storageRef = Storage.storage().reference()
         
@@ -30,12 +33,12 @@ extension PrincessController {
                         let ref6dai = storageRef.child("pictures/\(sixStarPictureName).png")
                         let sixStarPicturePath = documentDirectory + "/pictures/\(sixStarPictureName).png"
                         
-                        ref6dai.write(toFile: URL(string: sixStarPicturePath)!)
-                        
-                        ref6dai.write(toFile: URL(string: sixStarPicturePath)!).observe(.progress){ snapshot in
-                            let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-                            print("六星大图下载进度:\(percentComplete)")
-                            }
+                        let downloadSixStarTask = ref6dai.write(toFile: URL(string: sixStarPicturePath)!)
+                                                
+                        downloadSixStarTask.observe(.success) { snapshot in
+                            sixStarPictureNumbers += 1
+                            print("sixStarPictureNumbers:\(sixStarPictureNumbers)")
+                        }
                     }
                     
                     //下载三星大图
@@ -56,10 +59,26 @@ extension PrincessController {
                     let iconFilePath = documentDirectory + "/icons/\(iconName).png"
                     let pictureFilePath = documentDirectory + "/pictures/\(bigPictureName).png"
                         
-                    ref.write(toFile: URL(string: iconFilePath)!)
-                    ref3dai.write(toFile: URL(string: pictureFilePath)!)
+                    let downloadIconTask = ref.write(toFile: URL(string: iconFilePath)!)
+                    let downloadThreeStarTask = ref3dai.write(toFile: URL(string: pictureFilePath)!)
+                    
+                    downloadIconTask.observe(.success) { snapshot in
+                        iconNumbers += 1
+                        print("iconNumbers:\(iconNumbers)")
+                    }
+                    downloadThreeStarTask.observe(.success) { snapshot in
+                        threeStarPictureNumbers += 1
+                        print("threeStarPictureNumbers:\(threeStarPictureNumbers)")
+                    }
 
                 }
+                
+                if threeStarPictureNumbers == data.count{
+                    print("下载完成")
+                }
+                
+                
+                
             }
         }
     }
