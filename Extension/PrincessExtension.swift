@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import SwiftyJSON
 import Alamofire
+import ProgressHUD
 
 extension PrincessController {
         
@@ -27,6 +28,8 @@ extension PrincessController {
                 
                 for num in 0...data.count - 1{
                     
+                    ProgressHUD.show("加载中")
+                    
                     //下载六星大图
                     if data[num,"replace","havesixstar"].boolValue == true{
                         let sixStarPictureName = data[num,"name"].stringValue + "6dai"
@@ -37,7 +40,7 @@ extension PrincessController {
                                                 
                         downloadSixStarTask.observe(.success) { snapshot in
                             sixStarPictureNumbers += 1
-                            print("sixStarPictureNumbers:\(sixStarPictureNumbers)")
+                            //print("sixStarPictureNumbers:\(sixStarPictureNumbers)")
                         }
                     }
                     
@@ -64,21 +67,21 @@ extension PrincessController {
                     
                     downloadIconTask.observe(.success) { snapshot in
                         iconNumbers += 1
-                        print("iconNumbers:\(iconNumbers)")
+                        //print("iconNumbers:\(iconNumbers)")
                     }
                     downloadThreeStarTask.observe(.success) { snapshot in
                         threeStarPictureNumbers += 1
-                        print("threeStarPictureNumbers:\(threeStarPictureNumbers)")
+                        //print("threeStarPictureNumbers:\(threeStarPictureNumbers)")
+                        let progress = Float(String(format: "%.2f", CGFloat(threeStarPictureNumbers) / CGFloat(data.count)))!
+                        print(progress)
                     }
-
+                    
+                    if threeStarPictureNumbers == data.count{
+                        print("下载完成")
+                        ProgressHUD.dismiss()
+                    }
                 }
-                
-                if threeStarPictureNumbers == data.count{
-                    print("下载完成")
-                }
-                
-                
-                
+                                
             }
         }
     }

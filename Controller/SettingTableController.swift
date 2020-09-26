@@ -75,6 +75,8 @@ class SettingTableController: UITableViewController {
                 }
             }
             
+            self.tableView.reloadData()
+            
         }))
         
         deleteFileAlert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
