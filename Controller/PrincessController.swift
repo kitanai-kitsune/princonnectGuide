@@ -147,7 +147,7 @@ class PrincessController: UITableViewController {
         
     }
     
-    private func alert(){
+    func alert(){
         let alert = UIAlertController(title: "检查到有更新数据", message: "是否下载数据", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
             self.deleteRealmData()

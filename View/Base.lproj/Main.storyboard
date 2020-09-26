@@ -628,6 +628,27 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rGn-oe-nOS">
+                                        <rect key="frame" x="0.0" y="416.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rGn-oe-nOS" id="590-YW-CQe">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3GI-4S-RT4">
+                                                    <rect key="frame" x="161" y="7" width="92" height="30"/>
+                                                    <state key="normal" title="重新下载图片"/>
+                                                    <connections>
+                                                        <action selector="redownloadPictures:" destination="e2W-1f-AJd" eventType="touchUpInside" id="puf-6m-r2R"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3GI-4S-RT4" firstAttribute="centerX" secondItem="590-YW-CQe" secondAttribute="centerX" id="W1Z-Kh-5hE"/>
+                                                <constraint firstItem="3GI-4S-RT4" firstAttribute="centerY" secondItem="590-YW-CQe" secondAttribute="centerY" id="WTh-j1-2Pp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -647,7 +668,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I0U-Nh-ySp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3912" y="333"/>
+            <point key="canvasLocation" x="3911.594202898551" y="332.8125"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Rko-Vs-Cqf">

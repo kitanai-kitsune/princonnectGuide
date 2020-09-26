@@ -16,6 +16,10 @@ class SettingTableController: UITableViewController {
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var currentVersion: UILabel!
     @IBOutlet weak var remoteVersion: UILabel!
+    @IBAction func redownloadPictures(_ sender: Any) {
+        PrincessController().downloadToLocal()
+    }
+    
     
     let claerCacheAlert = UIAlertController(title: "清除缓存", message: "确认清除缓存", preferredStyle: .alert)
     let deleteFileAlert = UIAlertController(title: "清除数据", message: "确认清除数据", preferredStyle: .alert)
@@ -75,8 +79,6 @@ class SettingTableController: UITableViewController {
                 }
             }
             
-            self.tableView.reloadData()
-            
         }))
         
         deleteFileAlert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
@@ -92,6 +94,7 @@ class SettingTableController: UITableViewController {
         
         if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/Documents/icons") && FileManager.default.fileExists(atPath: NSHomeDirectory() + "/Documents/pictures"){
             fileStorage.text = String(calculateFileUsage(filePath: "pictures") + calculateFileUsage(filePath: "icons")) + "MB"
+            tableView.reloadData()
         }
         currentVersion.text = String(UserDefaults.standard.integer(forKey: "currentVersion"))
         remoteVersion.text = String(UserDefaults.standard.integer(forKey: "remoteVersion"))
@@ -121,7 +124,7 @@ class SettingTableController: UITableViewController {
         case 0:
             return 4
         case 1:
-            return 3
+            return 4
         default:
             return 1
         }
