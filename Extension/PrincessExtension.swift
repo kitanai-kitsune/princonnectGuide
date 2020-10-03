@@ -10,7 +10,6 @@ import Foundation
 import Firebase
 import SwiftyJSON
 import Alamofire
-import ProgressHUD
 
 extension PrincessController {
         
@@ -27,9 +26,7 @@ extension PrincessController {
                 let documentDirectory = "file://" + NSHomeDirectory() + "/Documents"
                 
                 for num in 0...data.count - 1{
-                    
-                    ProgressHUD.show("加载中")
-                    
+                                        
                     //下载六星大图
                     if data[num,"replace","havesixstar"].boolValue == true{
                         let sixStarPictureName = data[num,"name"].stringValue + "6dai"
@@ -71,14 +68,10 @@ extension PrincessController {
                     }
                     downloadThreeStarTask.observe(.success) { snapshot in
                         threeStarPictureNumbers += 1
-                        //print("threeStarPictureNumbers:\(threeStarPictureNumbers)")
+                        print("threeStarPictureNumbers:\(threeStarPictureNumbers)")
                         let progress = Float(String(format: "%.2f", CGFloat(threeStarPictureNumbers) / CGFloat(data.count)))!
                         print(progress)
-                    }
-                    
-                    if threeStarPictureNumbers == data.count{
-                        print("下载完成")
-                        ProgressHUD.dismiss()
+                        
                     }
                 }
                                 

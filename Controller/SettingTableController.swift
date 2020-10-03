@@ -17,7 +17,15 @@ class SettingTableController: UITableViewController {
     @IBOutlet weak var currentVersion: UILabel!
     @IBOutlet weak var remoteVersion: UILabel!
     @IBAction func redownloadPictures(_ sender: Any) {
-        PrincessController().downloadToLocal()
+        
+        let alert = UIAlertController(title: "重新下载图片", message: "确认重新下载所有图片", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (UIAlertAction) in
+            PrincessController().downloadToLocal()
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (UIAlertAction) in
+            
+        }))
+        present(alert, animated: true)
     }
     
     
