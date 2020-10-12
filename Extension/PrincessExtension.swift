@@ -72,6 +72,9 @@ extension PrincessController {
                         let progress = Float(String(format: "%.2f", CGFloat(threeStarPictureNumbers) / CGFloat(data.count)))!
                         print(progress)
                         
+                        if progress == 1.0{
+                            print("下载完成")
+                        }
                     }
                 }
                                 

@@ -21,20 +21,18 @@ class ScrollView: UIViewController {
         
         imageView = UIImageView(image: (UIImage(named: "placeholder")))
         
-        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
-            let path = url.appendingPathComponent("pictures/\(imageName).png")
-            
-            imageView.kf.setImage(
-                with: path,
-                placeholder: nil,
-                options: [
-                    .transition(.fade(0.5))
-                ]
-            )
-            
-        }
+        let documentDirectory = "file://" + NSHomeDirectory() + "/Documents"
+        let path = documentDirectory + "/pictures/\(imageName).png"
+        let url = URL(string: path)
         
-                
+        imageView.kf.setImage(
+            with: url,
+            placeholder: nil,
+            options: [
+                .transition(.fade(0.5))
+            ]
+        )
+        
         config()
         
         //scroll的拖动功能
@@ -54,6 +52,7 @@ class ScrollView: UIViewController {
         
         //优先检测tapTwice,若检测不到,或检测失败,则检测tapOnce,检测成功后,触发方法
         tapOnce.require(toFail: tapTwice)
+        
     }
     
     override func viewDidLayoutSubviews() {
