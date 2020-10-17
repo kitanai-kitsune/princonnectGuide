@@ -12,7 +12,7 @@ import SwiftyJSON
 import Alamofire
 
 extension PrincessController {
-        
+    
     func downloadToLocal(){
         var sixStarPictureNumbers = 0
         var threeStarPictureNumbers = 0
@@ -23,22 +23,29 @@ extension PrincessController {
         AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/CharactorDatas.json").responseJSON { response in
             if let json = response.value{
                 let data = JSON(json)//获取系统可读取可使用的JSON数据格式 JSON()
-                let documentDirectory = "file://" + NSHomeDirectory() + "/Documents"
+                let documentDirectory = NSHomeDirectory() + "/Documents"
                 
                 for num in 0...data.count - 1{
-                                        
+                    
                     //下载六星大图
                     if data[num,"replace","havesixstar"].boolValue == true{
                         let sixStarPictureName = data[num,"name"].stringValue + "6dai"
                         let ref6dai = storageRef.child("pictures/\(sixStarPictureName).png")
                         let sixStarPicturePath = documentDirectory + "/pictures/\(sixStarPictureName).png"
                         
-                        let downloadSixStarTask = ref6dai.write(toFile: URL(string: sixStarPicturePath)!)
-                                                
-                        downloadSixStarTask.observe(.success) { snapshot in
-                            sixStarPictureNumbers += 1
-                            //print("sixStarPictureNumbers:\(sixStarPictureNumbers)")
+                        //let downloadSixStarTask = ref6dai.write(toFile: URL(string: sixStarPicturePath)!)
+                        if FileManager.default.fileExists(atPath: sixStarPicturePath) == false{
+                            let downloadSixStarTask = ref6dai.write(toFile: URL(string: "file://" + sixStarPicturePath)!)
+                            
+                            downloadSixStarTask.observe(.success) { snapshot in
+                                sixStarPictureNumbers += 1
+                                print("已下载的六星大图数:\(sixStarPictureNumbers)")
+                            }
+                            
+                        }else{
+                            print("已存在,停止下载")
                         }
+                        
                     }
                     
                     //下载三星大图
@@ -54,30 +61,35 @@ extension PrincessController {
                     }
                     
                     let ref = storageRef.child("icons/\(iconName).png")
-                                        
+                    
                     //分配下载路径
                     let iconFilePath = documentDirectory + "/icons/\(iconName).png"
                     let pictureFilePath = documentDirectory + "/pictures/\(bigPictureName).png"
-                        
-                    let downloadIconTask = ref.write(toFile: URL(string: iconFilePath)!)
-                    let downloadThreeStarTask = ref3dai.write(toFile: URL(string: pictureFilePath)!)
                     
-                    downloadIconTask.observe(.success) { snapshot in
-                        iconNumbers += 1
-                        //print("iconNumbers:\(iconNumbers)")
-                    }
-                    downloadThreeStarTask.observe(.success) { snapshot in
-                        threeStarPictureNumbers += 1
-                        print("threeStarPictureNumbers:\(threeStarPictureNumbers)")
-                        let progress = Float(String(format: "%.2f", CGFloat(threeStarPictureNumbers) / CGFloat(data.count)))!
-                        print(progress)
+                    if FileManager.default.fileExists(atPath: iconFilePath) == false{
+                        let downloadIconTask = ref.write(toFile: URL(string: "file://" + iconFilePath)!)
                         
-                        if progress == 1.0{
-                            print("下载完成")
+                        downloadIconTask.observe(.success) { snapshot in
+                            iconNumbers += 1
+                            print("已下载的小图数:\(iconNumbers)")
+                        }
+                    }
+                    
+                    if FileManager.default.fileExists(atPath: pictureFilePath) == false{
+                        let downloadThreeStarTask = ref3dai.write(toFile: URL(string: "file://" + pictureFilePath)!)
+                        
+                        downloadThreeStarTask.observe(.success) { snapshot in
+                            threeStarPictureNumbers += 1
+                            print("已下载的三星大图数:\(threeStarPictureNumbers)")
+                            let progress = Float(String(format: "%.2f", CGFloat(threeStarPictureNumbers) / CGFloat(data.count)))!
+                            print(progress)
+                            
+                            if progress == 1.0{
+                                print("下载完成")
+                            }
                         }
                     }
                 }
-                                
             }
         }
     }
@@ -95,7 +107,7 @@ extension PrincessController {
         
         let semaphore = DispatchSemaphore(value: 0)
         let queue = DispatchQueue.global(qos: .utility)
-                
+        
         AF.request("https://raw.githubusercontent.com/kitanai-kitsune/PCRCharacterData/master/RemoteVersion.json").responseJSON(queue: queue) { responds in
             if let json = responds.value{
                 let data = JSON(json)
