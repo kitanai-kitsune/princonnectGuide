@@ -48,11 +48,7 @@ class DetailInformationController: UIViewController {
             present(scrollView, animated: true, completion: nil)
         }
     }
-    
-}
-
-extension DetailInformationController {
-    
+        
     private func loadFromLoaclStorage(){
         
         characterStar.text = String(Star)

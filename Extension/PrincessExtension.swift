@@ -41,9 +41,6 @@ extension PrincessController {
                                 sixStarPictureNumbers += 1
                                 print("已下载的六星大图数:\(sixStarPictureNumbers)")
                             }
-                            
-                        }else{
-                            print("已存在,停止下载")
                         }
                         
                     }
@@ -82,11 +79,7 @@ extension PrincessController {
                             threeStarPictureNumbers += 1
                             print("已下载的三星大图数:\(threeStarPictureNumbers)")
                             let progress = Float(String(format: "%.2f", CGFloat(threeStarPictureNumbers) / CGFloat(data.count)))!
-                            print(progress)
-                            
-                            if progress == 1.0{
-                                print("下载完成")
-                            }
+                            //print(progress)
                         }
                     }
                 }
